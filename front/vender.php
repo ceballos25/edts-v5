@@ -93,60 +93,53 @@ include_once ROOT_PATH . "/includes/head.php";
                                 <div class="row g-2" id="paquetesNumeros">
 
                                     <div class="col-6 col-md-4">
-                                        <input type="radio" class="btn-check paquete-radio" name="paqueteNumeros" id="paq3" value="3">
+                                        <input type="radio" class="btn-check paquete-radio" name="paqueteNumeros" id="paq3" value="20">
                                         <label class="btn btn-outline-primary w-100 py-2 d-flex flex-column align-items-center justify-content-center" for="paq3">
-                                            <div class="fw-semibold">3 </div>
-                                            <div class="small">$24.000</div>
-                                        </label>
-                                    </div>
-
-                                    <div class="col-6 col-md-4">
-                                        <input type="radio" class="btn-check paquete-radio" name="paqueteNumeros" id="paq4" value="4">
-                                        <label class="btn btn-outline-primary w-100 py-2 d-flex flex-column align-items-center justify-content-center" for="paq4">
-                                            <div class="fw-semibold">4 </div>
-                                            <div class="small">$32.000</div>
-                                        </label>
-                                    </div>
-
-                                    <div class="col-6 col-md-4">
-                                        <input type="radio" class="btn-check paquete-radio" name="paqueteNumeros" id="paq5" value="5">
-                                        <label class="btn btn-outline-primary w-100 py-2 d-flex flex-column align-items-center justify-content-center" for="paq5">
-                                            <div class="fw-semibold">5 </div>
-                                            <div class="small">$40.000</div>
-                                        </label>
-                                    </div>
-
-                                    <div class="col-6 col-md-4">
-                                        <input type="radio" class="btn-check paquete-radio" name="paqueteNumeros" id="paq7" value="7">
-                                        <label class="btn btn-outline-primary w-100 py-2 d-flex flex-column align-items-center justify-content-center" for="paq7">
-                                            <div class="fw-semibold">7 </div>
-                                            <div class="small">$56.000</div>
-                                        </label>
-                                    </div>
-
-                                    <div class="col-6 col-md-4">
-                                        <input type="radio" class="btn-check paquete-radio" name="paqueteNumeros" id="paq10" value="10">
-                                        <label class="btn btn-outline-primary w-100 py-2 d-flex flex-column align-items-center justify-content-center" for="paq10">
-                                            <div class="fw-semibold">10 </div>
-                                            <div class="small">$80.000</div>
-                                        </label>
-                                    </div>
-
-                                    <div class="col-6 col-md-4">
-                                        <input type="radio" class="btn-check paquete-radio" name="paqueteNumeros" id="paq20" value="20">
-                                        <label class="btn btn-outline-primary w-100 py-2 d-flex flex-column align-items-center justify-content-center" for="paq20">
                                             <div class="fw-semibold">20 </div>
-                                            <div class="small">$160.000</div>
+                                            <div class="small">$18.000</div>
                                         </label>
                                     </div>
 
                                     <div class="col-6 col-md-4">
-                                        <input type="radio" class="btn-check paquete-radio" name="paqueteNumeros" id="paq50" value="50">
-                                        <label class="btn btn-outline-primary w-100 py-2 d-flex flex-column align-items-center justify-content-center" for="paq50">
-                                            <div class="fw-semibold">50 </div>
-                                            <div class="small">$400.000</div>
+                                        <input type="radio" class="btn-check paquete-radio" name="paqueteNumeros" id="paq4" value="30">
+                                        <label class="btn btn-outline-primary w-100 py-2 d-flex flex-column align-items-center justify-content-center" for="paq4">
+                                            <div class="fw-semibold">30 </div>
+                                            <div class="small">$27.000</div>
                                         </label>
                                     </div>
+
+                                    <div class="col-6 col-md-4">
+                                        <input type="radio" class="btn-check paquete-radio" name="paqueteNumeros" id="paq5" value="50">
+                                        <label class="btn btn-outline-primary w-100 py-2 d-flex flex-column align-items-center justify-content-center" for="paq5">
+                                            <div class="fw-semibold">50</div>
+                                            <div class="small">$45.000</div>
+                                        </label>
+                                    </div>
+
+                                    <div class="col-6 col-md-4">
+                                        <input type="radio" class="btn-check paquete-radio" name="paqueteNumeros" id="paq7" value="70">
+                                        <label class="btn btn-outline-primary w-100 py-2 d-flex flex-column align-items-center justify-content-center" for="paq7">
+                                            <div class="fw-semibold">70</div>
+                                            <div class="small">$63.000</div>
+                                        </label>
+                                    </div>
+
+                                    <div class="col-6 col-md-4">
+                                        <input type="radio" class="btn-check paquete-radio" name="paqueteNumeros" id="paq10" value="100">
+                                        <label class="btn btn-outline-primary w-100 py-2 d-flex flex-column align-items-center justify-content-center" for="paq10">
+                                            <div class="fw-semibold">100</div>
+                                            <div class="small">$90.000</div>
+                                        </label>
+                                    </div>
+
+                                    <div class="col-6 col-md-4">
+                                        <input type="radio" class="btn-check paquete-radio" name="paqueteNumeros" id="paq20" value="200">
+                                        <label class="btn btn-outline-primary w-100 py-2 d-flex flex-column align-items-center justify-content-center" for="paq20">
+                                            <div class="fw-semibold">200</div>
+                                            <div class="small">$180.000</div>
+                                        </label>
+                                    </div>
+
 
                                     <div class="col-6 col-md-4">
 

@@ -7,6 +7,7 @@
   <!-- <script src="https//cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script> -->
   <?php include_once "pagination_script.php"; ?>
   <?php include_once "preloader.php"; ?>
+  <?php include_once "btn-share.php"; ?>
   <?php if(isset($extra_js)) echo $extra_js; ?>
 
 </body>

@@ -29,7 +29,7 @@ if ($orderId) {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Confirmación de compra | Caballos Revelo</title>
+    <title>Confirmación de compra | El dia de TU SUERTE 🍀</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Bootstrap -->
@@ -67,7 +67,7 @@ if ($orderId) {
             width: 3.2rem;
             height: 3.2rem;
             border-width: .35rem;
-            color: #f5c542;
+            color: #d500f9;
         }
         .brand-title {
             letter-spacing: -.02em;
@@ -78,7 +78,7 @@ if ($orderId) {
     </style>
 
     <!-- Meta Pixel -->
-    <script>
+    <!-- <script>
         !function(f,b,e,v,n,t,s)
         {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
         n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -89,7 +89,7 @@ if ($orderId) {
         'https://connect.facebook.net/en_US/fbevents.js');
 
         fbq('init', '515720491212872');
-    </script>
+    </script> -->
 </head>
 
 <body>
@@ -101,9 +101,9 @@ if ($orderId) {
         <?= $detalle['html_recibo']; ?>
 
         <div class="mt-4 text-center no-print">
-            <a href="https://caballosrevelo.com"
+            <a href="https://apfenix.test"
                class="btn btn-brand px-5 py-3 shadow">
-                Seguir comprando 🐎
+                Seguir comprando ⚡
             </a>
         </div>
     </div>
@@ -151,7 +151,7 @@ if ($orderId) {
             Verificar estado 🔄
         </button>
 
-        <a href="https://caballosrevelo.com"
+        <a href="https://apfenix.test"
            class="text-decoration-none text-muted small">
             Volver al inicio
         </a>
@@ -169,7 +169,7 @@ if ($orderId) {
             <p class="text-muted">
                 El enlace no es correcto o ya expiró.
             </p>
-            <a href="https://caballosrevelo.com"
+            <a href="https://apfenix.test"
                class="btn btn-brand px-4 py-2">
                 Volver al inicio
             </a>

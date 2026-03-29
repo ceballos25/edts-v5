@@ -27,7 +27,7 @@ class OpenPayController {
             'amount'      => (float)$b->amount_payment_backup,
             'currency'    => 'COP',
             'iva'         => '0',
-            'description' => 'Compra accesorios Caballos Revelo',
+            'description' => 'Compra Marketing Jorge Herrera',
             'order_id'    => $b->code_payment_backup,
 
             'redirect_url' => OPENPAY_RETURN_URL . '?order_id=' . $b->code_payment_backup,

@@ -1,7 +1,7 @@
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap');
 
     :root {
-        --gold: #d4af37;
+        --gold: #2D0434;
         --dark-bg: #1a1a1a;
     }
 
@@ -15,17 +15,33 @@
 
     /* HEADER */
     .promo-bar {
-        background: linear-gradient(45deg, #FFD700, #FFA500);
-        color: #000;
+        /* background: linear-gradient(45deg, #FFD700, #FFA500); */
+        background-color: #2D0434;
+        color: #fff;
         font-weight: 800;
         font-size: 0.9rem;
         text-transform: uppercase;
         letter-spacing: 1px;
         position: sticky;
+        z-index: 9999;
+    }
+
+    .millonario {
+        color: #d500f9 !important;
+    }
+
+    .premio-mayor {
+        border: 1px solid #d500f9;
+        color: white !important;
+        border-radius: 30px;
+        padding: 8px 20px;
+        cursor: pointer;
+        box-shadow: 0 0 15px rgba(213, 0, 249, 0.4);
+        transition: 0.3s;
     }
 
     .navbar-custom {
-        background-color: rgba(255, 255, 255, 0.95);
+        background-color: #050505;
         border-bottom: 2px solid var(--gold);
     }
 
@@ -42,10 +58,10 @@
         color: var(--gold);
     }
 
-.activo{
-    display: flex;
-    justify-content: center;
-}    
+    .activo {
+        display: flex;
+        justify-content: center;
+    }
 
     /* CARRUSEL & PREMIOS */
     .splide__slide img {
@@ -147,12 +163,27 @@
         background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
     }
 
+    .metodo-pago {
+        opacity: 0;
+        transform: translateY(10px);
+        transition: all 0.3s ease;
+    }
+
+    .metodo-pago.show {
+        opacity: 1;
+        transform: translateY(0);
+    }    
+
     /* FOOTER */
     footer {
         background: #111;
         color: #bbb;
         padding: 4rem 0 2rem;
         border-top: 3px solid var(--gold);
+    }
+
+    .border-top{
+        border-top: 1px solid #d500f9 !important;
     }
 
     footer a {
@@ -328,14 +359,14 @@
 
     /* Aseguramos que el Nav esté SIEMPRE encima de todo */
     .navbar-custom {
-        background-color: #ffffff !important;
+        background-color: #050505;
         /* Fondo sólido (sin transparencia) para que nada se vea detrás */
         border-bottom: 2px solid var(--gold);
         z-index: 1050 !important;
         /* Capa superior a la tarjeta */
-        position: sticky;
+        
         /* Refuerzo */
-        top: -1px;
+        /* top: -1px; */
     }
 
     .fw-black {
@@ -345,6 +376,7 @@
     .pulse-green {
         animation: pulse-animation 2s infinite;
     }
+
 
     @keyframes pulse-animation {
         0% {
@@ -435,6 +467,15 @@
         ;
     }
 
+    .title-premio-mayor{
+        color: #000;
+    }
+
+    .color-dinero-premio{
+        color: #d500f9 !important;
+    }
+
+
     h1.hero-title-dos.mb-3 {
         padding-top: 30px;
         font-size: 22px;
@@ -448,6 +489,12 @@
         text-align: center;
     }
 
+    .progress-bar{
+        background-color: #d500f9 !important;
+    }
+
+
+    
 
     @media (max-width: 768px) {
         img.premios-primer-sorteo {
@@ -504,10 +551,10 @@
 
     /* asegurar que el texto interno también sea negro */
 
-    .paquete-card .fw-semibold,
+    /* .paquete-card .fw-semibold,
     .paquete-card .small {
         color: #000 !important;
-    }
+    } */
 
 
     /* =========================
@@ -518,7 +565,7 @@
 
         transform: translateY(-3px);
 
-        border-color: #d4af37;
+        border-color: #d500f9;
 
         box-shadow: 0 8px 20px rgba(0, 0, 0, .08);
 
@@ -531,16 +578,15 @@
 
     .btn-check:checked+.paquete-card {
 
-        background: linear-gradient(145deg, #f5d27a, #d4af37);
+        background: #d500f9;
 
-        border-color: #caa437;
+        border-color: #ffffff;
+        color: #fff !important;
 
         transform: scale(1.03);
 
-        box-shadow: 0 10px 24px rgba(212, 175, 55, .35);
+        box-shadow: 0 10px 24px rgba(212, 204, 204, 0.35);
 
-        /* mantener texto negro */
-        color: #000 !important;
 
     }
 
@@ -556,7 +602,7 @@
         top: -10px;
         right: 10px;
 
-        background: #d4af37;
+        background: #ffffff;
 
         color: #000;
 
@@ -583,7 +629,8 @@
 
     .mas-vendido {
 
-        border: 2px solid #d4af37 !important;
+        border: 2px solid #d500f9 !important;
+        box-shadow: rgba(213, 0, 249, 0.4) 0px 0px 15px
 
     }
 
@@ -637,12 +684,12 @@
 
         outline: none;
 
-        border-color: #d4af37;
+        border-color: #d500f9;
 
         box-shadow: 0 0 0 3px rgba(212, 175, 55, .2);
 
     }
 
     .paquete-card:hover {
-        border: 2px solid #d4af37 !important
+        border: 2px solid #d500f9 !important
     }

@@ -79,6 +79,7 @@ class RifasController {
                 ];
                 ApiRequest::post("tickets?token=no&except=number_ticket", $ticket);
             }
+            
             return ['success' => true, 'message' => "Rifa creada con $totalBoletos boletos."];
         }
         return ['success' => false, 'message' => 'Error al crear la rifa.'];

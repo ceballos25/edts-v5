@@ -4,6 +4,9 @@ $page_title = "Gestión de Ventas";
 include_once ROOT_PATH . "/includes/head.php";
 ?>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
 <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-sidebartype="full">
     <?php include_once ROOT_PATH . "/includes/sidebar.php" ?>
 
@@ -46,19 +49,18 @@ include_once ROOT_PATH . "/includes/head.php";
                                     <option value="Efectivo">Efectivo</option>
                                     </select>
                             </div>                            
-                            <div class="col-md-2">
+                            <div class="col-md-2 d-none">
                                 <label class="form-label small fw-bold">Rifa</label>
                                 <select id="filterRifa" class="form-select form-select-sm">
                                     <option value="">Todas las rifas</option>
                                 </select>
                             </div>
                             <div class="col-md-2">
-                                <div class="d-flex gap-1">
-                                    <button class="btn btn-outline-secondary btn-sm w-100" onclick="limpiarFiltrosVentas()" title="Limpiar">
-                                        <i class="ti ti-refresh"></i>
-                                    </button>
-                                </div>
-                            </div>
+                                <label class="form-label small fw-bold">Vendedor</label>
+                                <select id="filterAdmin" class="form-select form-select-sm">
+                                    <option value="">Todos</option>
+                                </select>
+                            </div>                            
                         </div>
                     </div>
                 </div>

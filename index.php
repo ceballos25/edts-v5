@@ -1,6 +1,6 @@
 <?php
 require_once "config/config.php";
-$porcentaje_venta = 80.2;
+$porcentaje_venta = 10.2;
 ?>
 <!doctype html>
 <html lang="es">
@@ -8,8 +8,8 @@ $porcentaje_venta = 80.2;
 <head>
    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Caballos Revelo</title>
-    <meta name="description" content="¡Nueva dinámica para arrancar el año con toda!">
+    <title>El dia de TU SUERTE 🍀</title>
+    <meta name="description" content="App Fenix, el poder de ganar comienza aquí. Accede a motos, carros, casas y mucho más. Participa fácil, rápido y seguro desde cualquier lugar de Colombia.">
     <link rel="shortcut icon" href="assets/images/logos/logo.ico" type="image/x-icon">
 
 
@@ -23,7 +23,7 @@ $porcentaje_venta = 80.2;
 
 
     <!-- Facebook Pixel Code -->
-    <script>
+    <!-- <script>
         ! function(f, b, e, v, n, t, s) {
             if (f.fbq) return;
             n = f.fbq = function() {
@@ -45,78 +45,88 @@ $porcentaje_venta = 80.2;
         fbq('init', '515720491212872');
         fbq('track', 'PageView');
     </script>
+
     <noscript>
         <img height="1" width="1"
             src="https://www.facebook.com/tr?id=515720491212872&ev=PageView
     &noscript=1" />
-    </noscript>
+    </noscript> -->
     <!-- End Facebook Pixel Code -->
 </head>
 
 <body>
 
     <!-- PROMO -->
-    <div class="promo-bar text-center py-2">
+    <div class="promo-bar text-center py-2 ">
         <div class="container fw-bold">
-            🚨 ¡ATENCIÓN! Todos los números a <strong>$8.000</strong> 🚨
+            🚨 ¡ATENCIÓN! sticker a <strong>$900</strong> 🚨
         </div>
     </div>
 
     <!-- NAV -->
-    <nav class="navbar navbar-expand-lg navbar-custom sticky-top shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-custom shadow-sm">
         <div class="container justify-content-center justify-content-lg-between">
             <a class="navbar-brand d-flex align-items-center gap-2" href="#">
-                <img src="assets/images/logos/logo.jpg" height="70">
+                <img src="assets/images/logos/logo.jpg" height="100">
                 <div>
-                    <span class="fw-bold text-dark lh-1">CABALLOS</span><br>
-                    <span class="fw-bold text-warning small">REVELO</span>
+                    <span class="fw-bold text-light lh-1 text-center"></span><br>
                 </div>
             </a>
             <div id="promoCheckoutmMobile"
              class="alert alert-success py-2 mt-2 text-center fw-bold d-none">
                 
             </div>
-            <span class="badge bg-dark text-warning px-3 py-2 d-none d-lg-inline">
-                <i class="ti ti-calendar-event me-1"></i> ⚠️ Juega este 17 DE ABRIL POR LA DE MEDELLIN
+            <span class="badge bg-dark text-light px-3 py-2 d-none d-lg-inline">
+                <i class="ti ti-calendar-event me-1"></i> Juega 
             </span>
         </div>
     </nav>
 
     <!-- HERO -->
-    <section class="py-5">
+    <section class="py-3">
         <div class="container">
             <div class="row g-4">
 
                 <div class="col-lg-6">
-                    <span class="badge bg-dark text-warning mb-3 activo">🔥 Sorteo activo – cupos limitados</span>
 
                     <h1 class="hero-title mb-3">
-                        ¡Gana una <br><span>Hermosa Yegua</span>! 🐎
+                        ¡Gran combo <br><span class="millonario">Millonario 🤑</span>!
                     </h1>
 
                     <p class="text-muted fw-semibold mb-4 d-none">
                     </p>
 
                     <div class="card border-0 bg-transparent shadow-none rounded-4 overflow-hidden" style="text-align: center;">
-                        <section id="main-carousel" class="splide">
-                            <div class="splide__track">
-                                <ul class="splide__list">
-                                    <li class="splide__slide"><img class="premios-primer-sorteo" src="assets/images/profile/4.jpg" loading="lazy"></li>
-                                    <li class="splide__slide"><img class="premios-primer-sorteo" src="assets/images/profile/1.jpeg" loading="lazy"></li>
-                                    <li class="splide__slide"><img class="premios-primer-sorteo" src="assets/images/profile/premio-primer-sorteo-uno.jpg" loading="lazy"></li>
-                                    <li class="splide__slide"><img class="premios-primer-sorteo" src="assets/images/profile/premio-primer-sorteo-doss.jpg" loading="lazy"></li>
-                                    <li class="splide__slide"><img class="premios-primer-sorteo" src="assets/images/profile/premio-primer-sorteo-tres.jpg" loading="lazy"></li>
-                                    <li class="splide__slide"><img class="premios-primer-sorteo" src="assets/images/profile/premio-primer-sorteo-cuatroo.jpg" loading="lazy"></li>
 
-                                </ul>
-                            </div>
-                        </section>
-                    </div>
-                    <section class="mt-3 d-flex justify-content-center">
-                        <a href="#compra" class="btn btn-warning btn-lg fw-bold shadow px-5 py-3 mb-4 boton-principal-comprar ">
-                        🎟️ Comprar
-                    </a>
+                    <!-- Carrusel principal -->
+                    <section id="main-carousel" class="splide">
+                        <div class="splide__track">
+                        <ul class="splide__list">
+                            <li class="splide__slide">
+                            <img class="premios-primer-sorteo" src="https://res.cloudinary.com/di8tkjrss/image/upload/v1774706761/1_ipt3nt.jpg" alt="Imagen 1" loading="lazy">
+                            </li>
+                            <li class="splide__slide">
+                            <img class="premios-primer-sorteo" src="https://res.cloudinary.com/di8tkjrss/image/upload/v1774706761/2_s3rvjj.jpg" alt="Imagen 2" loading="lazy">
+                            </li>
+                        </ul>
+                        </div>
                     </section>
+
+                    <!-- Miniaturas -->
+                    <section id="thumbnail-carousel" class="splide mt-3">
+                        <div class="splide__track">
+                        <ul class="splide__list">
+                            <li class="splide__slide">
+                            <img src="https://res.cloudinary.com/di8tkjrss/image/upload/v1774706761/1_ipt3nt.jpg" alt="Miniatura 1" loading="lazy">
+                            </li>
+                            <li class="splide__slide">
+                            <img src="https://res.cloudinary.com/di8tkjrss/image/upload/v1774706761/2_s3rvjj.jpg" alt="Miniatura 2" loading="lazy">
+                            </li>
+                        </ul>
+                        </div>
+                    </section>
+                    </div>
+            
                 </div>
 
                 <div class="col-lg-6">
@@ -125,19 +135,20 @@ $porcentaje_venta = 80.2;
 
                         <!-- PREMIO MAYOR -->
                         <div class="col-12">
-                            <div class="card border-0 shadow-sm">
-                                <div class="card-body d-flex align-items-start gap-3">
+                            <div class="">
+                                <div class="card-body d-flex align-items-start gap-3 premio-mayor">
 
                                     <div class="bg-warning bg-opacity-25 rounded-circle p-3">
                                         <i class="ti ti-trophy fs-4 text-warning"></i>
                                     </div>
 
                                     <div>
-                                        <h5 class="fw-bold mb-1">Premio Mayor</h5>
+                                        <h5 class="fw-bold mb-1 title-premio-mayor">Premio Mayor</h5>
                                         <p class="fs-6 text-muted fw-bold  mb-0">
-                                            Hermosa Yegua totalmente aperada y con transporte. 
-                                            Por la 🎫 de Medellín
+                                            Nmax 0 km +
+                                            $3.000.000 💰
                                         </p>
+                                        <span class="small text-muted">Por la loter1a de Medellin 🎫</span>
                                     </div>
 
                                 </div>
@@ -146,61 +157,92 @@ $porcentaje_venta = 80.2;
 
 
                         <!-- NUMERO INVERTIDO -->
-                        <div class="col-6 d-flex">
+                        <div class="col-md-12 d-flex">
                             <div class="card border-0 shadow-sm text-center w-100">
                                 <div class="card-body">
 
-                                    <h3 class="fw-bold text-success mb-1">
-                                        $2.000.000
+                                    <h3 class="fw-bold mb-1">
+                                        Pulsar NS 125 FI + <span class="color-dinero-premio"> $2.000.000</span>
                                     </h3>
 
                                     <small class="fw-bold text-muted">
                                         Número invertido
                                     </small>
-
+                                    
                                 </div>
+                                <span class="small text-muted">Por la loter1a de Medellin 🎫</span>
                             </div>
-                        </div>
+                        </div>                        
 
 
                         <!-- ANTICIPADOS -->
-                        <div class="col-6 d-flex">
+                        <div class="col-md-12 d-flex">
                             <div class="card border-0 shadow-sm text-center w-100">
                                 <div class="card-body">
 
-                                    <h3 class="fw-bold text-success mb-2">
-                                        $500.000
+                                    <h3 class="fw-bold mb-2">
+                                        10 Ancipados de <span class="color-dinero-premio"> $500.000</span>
                                     </h3>
 
                                     <small class="fw-bold text-muted">
-                                        Anticipados de 500 mil desde el viernes 13 de marzo 
-                                        hasta el 10 de abril por la de Medellín
+                                        ¡Pago Inmediato!
                                     </small>
 
                                 </div>
+                                <span class="small text-muted">Por la loter1a de Medellin 🎫</span>
                             </div>
                         </div>
+
+                        <!-- AFORTUNADOS -->
+                        <div class="col-12 d-flex">
+                            <div class="card border-0 shadow-sm text-center w-100">
+                                <div class="card-body">
+
+                                    <h3 class="fw-bold text-dark mb-1">
+                                        10 Afortunados de <span class="color-dinero-premio">$500.000</span>
+                                    </h3>
+                                    <button class="btn btn-outline-success m-2 fw-bold">30405</button>
+                                    <button class="btn btn-outline-success m-2 fw-bold">00007</button>
+                                    <button class="btn btn-outline-success m-2 fw-bold">30068</button>
+                                    <button class="btn btn-outline-success m-2 fw-bold">26034</button>
+                                    <button class="btn btn-outline-success m-2 fw-bold">77777</button>
+                                    <button class="btn btn-outline-success m-2 fw-bold">82041</button>
+                                    <button class="btn btn-outline-success m-2 fw-bold">12998</button>
+                                    <button class="btn btn-outline-success m-2 fw-bold">95585</button>
+                                    <button class="btn btn-outline-success m-2 fw-bold">57001</button>
+                                    <button class="btn btn-outline-success m-2 fw-bold">53760</button>
+
+                                    <div class="display-flex m-1">
+                                    <small class="fw-bold text-muted m-5 justify-content-center">
+                                        ¡Pago Inmediato!
+                                    </small>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>                         
 
                     </div>
 
 
                     <!-- PROGRESO -->
-                    <div class="card border-0 shadow-sm text-center mb-4">
+                    <div class="card border-0 shadow-sm text-center mb-4 d-none">
                         <div class="card-body">
 
                             <div class="d-flex justify-content-between fw-bold">
-                                <span>🔥 Números vendidos</span>
+                                <span>🔥 Vendidos</span>
                                 <span><?= $porcentaje_venta ?>%</span>
                             </div>
 
                             <div class="progress my-2">
-                                <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated"
+                                <div class="progress-bar bg- progress-bar-striped progress-bar-animated"
                                     style="width:<?= $porcentaje_venta ?>%">
                                 </div>
                             </div>
 
                             <small class="text-muted">
-                                ⚠️ Al llegar al 100% se cierra automáticamente la venta 💨🏃‍➡️
+                                 Juega cuando lleguemos al 100% de las ventas
                             </small>
 
                         </div>
@@ -208,22 +250,18 @@ $porcentaje_venta = 80.2;
 
 
                     <!-- PRECIO BOLETA -->
-                    <div class="card bg-dark text-center mb-3">
+                    <div class="card bg-dark text-center mb-3 d-none">
                         <div class="card-body">
 
                             <h2 class="fw-bold text-warning display-6 mb-2" id="precioBoletaDisplay">
                                 <div class="spinner-border spinner-border-sm"></div>
                             </h2>
-
-                            <span class="badge bg-warning text-dark px-3">
-                                POR BOLETA
-                            </span>
                 
-                            <!-- FECHA -->
+                            <!-- Minimo -->
 
-                    <h5 class="fw-bold text-center text-white mt-2">
-                        <i class="ti ti-calendar-event me-1"></i> Juega este 17 de abril por la de Medellín
-                    </h5>
+                            <small class="fw-bold text-center text-white mt-2">
+                                Mínimo 20 para participar
+                            </small>
 
                         </div>
                     </div>
@@ -252,7 +290,7 @@ $porcentaje_venta = 80.2;
                           
                             </div>
                                 <p>
-                                    <small class="text-muted py-3 px-3">🚧 Mínimo 3 para participar</small>     
+                                    <small class="text-muted py-3 px-3">🚧 Mínimo 20 para participar</small>     
                                 </p>
                         </div>
 
@@ -262,33 +300,33 @@ $porcentaje_venta = 80.2;
 
                             <!-- 3 -->
                             <div class="col-6 col-md-4">
-                            <input type="radio" class="btn-check paquete-radio" name="paqueteNumeros" id="paq3" value="3">
+                            <input type="radio" class="btn-check paquete-radio" name="paqueteNumeros" id="paq3" value="20">
                             <label class="btn btn-outline-primary w-100 py-2 d-flex flex-column align-items-center justify-content-center paquete-card" for="paq3">
-                            <div class="fw-semibold">3</div>
-                            <div class="small">$24.000</div>
+                            <div class="fw-bold">20</div>
+                            <div class="fs-5 fw-bold">$18.000</div>
                             </label>
                             </div>
 
 
                             <!-- 4 -->
                             <div class="col-6 col-md-4">
-                            <input type="radio" class="btn-check paquete-radio" name="paqueteNumeros" id="paq4" value="4">
+                            <input type="radio" class="btn-check paquete-radio" name="paqueteNumeros" id="paq4" value="30">
                             <label class="btn btn-outline-primary w-100 py-2 d-flex flex-column align-items-center justify-content-center paquete-card" for="paq4">
-                            <div class="fw-semibold">4</div>
-                            <div class="small">$32.000</div>
+                            <div class="fw-bold">30</div>
+                            <div class="fs-5 fw-bold">$27.000</div>
                             </label>
                             </div>
 
 
                             <!-- 5 -->
                             <div class="col-6 col-md-4">
-                            <input type="radio" class="btn-check paquete-radio" name="paqueteNumeros" id="paq5" value="5">
+                            <input type="radio" class="btn-check paquete-radio" name="paqueteNumeros" id="paq5" value="50">
                             <label class="btn btn-outline-primary w-100 py-2 d-flex flex-column align-items-center justify-content-center paquete-card popular" for="paq5">
 
                             <span class="badge-paquete">🎯 Popular</span>
 
-                            <div class="fw-semibold">5</div>
-                            <div class="small">$40.000</div>
+                            <div class="fw-bold">50</div>
+                            <div class="fs-5 fw-bold">$45.000</div>
 
                             </label>
                             </div>
@@ -296,13 +334,13 @@ $porcentaje_venta = 80.2;
 
                             <!-- 7 -->
                             <div class="col-6 col-md-4">
-                            <input type="radio" class="btn-check paquete-radio" name="paqueteNumeros" id="paq7" value="7">
+                            <input type="radio" class="btn-check paquete-radio" name="paqueteNumeros" id="paq7" value="70">
                             <label class="btn btn-outline-primary w-100 py-2 d-flex flex-column align-items-center justify-content-center paquete-card recomendado" for="paq7">
 
                             <span class="badge-paquete">⭐ Recomendado</span>
 
-                            <div class="fw-semibold">7</div>
-                            <div class="small">$56.000</div>
+                            <div class="fw-bold">70</div>
+                            <div class="fs-5 fw-bold">$63.000</div>
 
                             </label>
                             </div>
@@ -310,13 +348,13 @@ $porcentaje_venta = 80.2;
 
                             <!-- 10 -->
                             <div class="col-6 col-md-4">
-                            <input type="radio" class="btn-check paquete-radio" name="paqueteNumeros" id="paq10" value="10">
+                            <input type="radio" class="btn-check paquete-radio" name="paqueteNumeros" id="paq10" value="100">
                             <label class="btn btn-outline-primary w-100 py-2 d-flex flex-column align-items-center justify-content-center paquete-card mas-vendido" for="paq10">
 
                             <span class="badge-paquete">🔥 Más vendido</span>
 
-                            <div class="fw-semibold">10</div>
-                            <div class="small">$80.000</div>
+                            <div class="fw-bold">100</div>
+                            <div class="fs-5 fw-bold">$90.000</div>
 
                             </label>
                             </div>
@@ -324,30 +362,17 @@ $porcentaje_venta = 80.2;
 
                             <!-- 20 -->
                             <div class="col-6 col-md-4">
-                            <input type="radio" class="btn-check paquete-radio" name="paqueteNumeros" id="paq20" value="20">
+                            <input type="radio" class="btn-check paquete-radio" name="paqueteNumeros" id="paq20" value="200">
                             <label class="btn btn-outline-primary w-100 py-2 d-flex flex-column align-items-center justify-content-center paquete-card mejor-valor" for="paq20">
 
-                            <span class="badge-paquete">💰 Mejor valor</span>
+                            <span class="badge-paquete">💰 VIP</span>
 
-                            <div class="fw-semibold">20</div>
-                            <div class="small">$160.000</div>
-
-                            </label>
-                            </div>
-
-
-                            <!-- 50 -->
-                            <div class="col-6 col-md-4">
-                            <input type="radio" class="btn-check paquete-radio" name="paqueteNumeros" id="paq50" value="50">
-                            <label class="btn btn-outline-primary w-100 py-2 d-flex flex-column align-items-center justify-content-center paquete-card vip" for="paq50">
-
-                            <span class="badge-paquete">👑 VIP</span>
-
-                            <div class="fw-semibold">50</div>
-                            <div class="small">$400.000</div>
+                            <div class="fw-bold">200</div>
+                            <div class="fs-5 fw-bold">$180.000</div>
 
                             </label>
                             </div>
+
 
 
                             <!-- CUSTOM -->
@@ -364,7 +389,7 @@ $porcentaje_venta = 80.2;
 
                             <span class="badge-paquete">🎯 Personalizado</span>
 
-                            <div class="fw-semibold">Otro</div>
+                            <div class="fw-bold">Otro</div>
 
                             </label>
 
@@ -391,7 +416,7 @@ $porcentaje_venta = 80.2;
 
                 <!-- SIDEBAR DESKTOP -->
                 <div class="col-lg-4 d-none d-lg-block">
-                    <div class="card border-0 shadow sticky-top" style="top:90px">
+                    <div class="card border-0 shadow sticky-top" style="">
                         <div class="card-body">
                             <h4 class="fw-bold mb-3">Tu Compra</h4>
 
@@ -437,7 +462,7 @@ $porcentaje_venta = 80.2;
         </div>
     </section>
     
-      <section class="texto-ganadores">
+      <section class="texto-ganadores d-none">
         <div  >
             <div id="prizesCarousel" class="carousel slide" data-bs-ride="carousel">
                 <h2 class="title-ganadores text-center title-premios">¡Últimos ganadores! 🥳</h2>
@@ -445,26 +470,26 @@ $porcentaje_venta = 80.2;
         </div>
     </section>
 
-    <section class="container-ganadores">
+    <section class="container-ganadores d-none">
         <div id="exampleCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item">
-                    <img src="assets/images/profile/ganador-diciembre.jpg" class="d-block w-100" alt="Ganador 1">
+                    <img src="" class="d-block w-100" alt="Ganador 1">
                 </div>
                 <div class="carousel-item">
-                    <img src="assets/images/profile/ganador-unos.jpeg" class="d-block w-100" alt="Ganador 1">
+                    <img src="" class="d-block w-100" alt="Ganador 1">
                 </div>
                 <div class="carousel-item active">
-                    <img src="assets/images/profile/ultimo-ganador.png" class="d-block w-100" alt="Ganador 1">
+                    <img src="" class="d-block w-100" alt="Ganador 1">
                 </div>
                 <div class="carousel-item">
-                    <img src="assets/images/profile/ganador-uno.jpeg" class="d-block w-100" alt="Ganador 1">
+                    <img src="" class="d-block w-100" alt="Ganador 1">
                 </div>
                 <div class="carousel-item">
-                    <img src="assets/images/profile/ganador-3.png" class="d-block w-100" alt="Ganador 1">
+                    <img src="" class="d-block w-100" alt="Ganador 1">
                 </div>
                 <div class="carousel-item">
-                    <img src="assets/images/profile/ganador-dos.jpeg" class="d-block w-100" alt="Ganador 1">
+                    <img src="" class="d-block w-100" alt="Ganador 1">
                 </div>
 
             </div>
@@ -486,21 +511,21 @@ $porcentaje_venta = 80.2;
 
                 <!-- Marca -->
                 <div class="col-md-4">
-                    <h5 class="fw-bold text-warning">Caballos Revelo</h5>
+                    <h5 class="fw-bold text-warning">El dia de TU SUERTE 🍀</h5>
                     <p class="small text-secondary">
-                        Plataforma oficial de participación equina.<br>
+                        Emocionantes oportunidades para ganar  Motos, Carros y más. ¡Participa y gana!.<br>
                         Transparencia, respaldo y seguridad en cada dinámica.
                     </p>
 
                     <!-- Redes (desktop) -->
                     <div class="d-none d-md-flex gap-2 mt-3">
-                        <a href="https://www.instagram.com/caballosrevelo/" target="_blank" class="btn btn-outline-light btn-sm rounded-circle">
+                        <a href="https://www.instagram.com/angelica_paez00" target="_blank" class="btn btn-outline-light btn-sm rounded-circle">
                             <i class="ti ti-brand-instagram"></i>
                         </a>
-                        <a href="#" target="_blank" class="btn btn-outline-success btn-sm rounded-circle">
+                        <a href="https://wa.me/573202925348?text=Hola%20" target="_blank" class="btn btn-outline-success btn-sm rounded-circle">
                             <i class="ti ti-brand-whatsapp"></i>
                         </a>
-                        <a href="https://www.facebook.com/profile.php?id=61562081602448&locale=es_LA" target="_blank" class="btn btn-outline-primary btn-sm rounded-circle">
+                        <a href="" target="_blank" class="btn btn-outline-primary btn-sm rounded-circle d-none">
                             <i class="ti ti-brand-facebook"></i>
                         </a>
                     </div>
@@ -511,14 +536,24 @@ $porcentaje_venta = 80.2;
                     <h6 class="fw-bold text-uppercase mb-3">Enlaces de interés</h6>
                     <ul class="list-unstyled small">
                         <li class="mb-2">
-                            <a href="#compra" class="text-secondary text-decoration-none">Comprar números</a>
+                            <a href="#compra" class="text-secondary text-decoration-none">Comprar stickers</a>
                         </li>
                         <li class="mb-2">
-                            <a href="assets/doc/ptd.pdf" class="text-secondary text-decoration-none">Política de privacidad</a>
+                            <a href="assets/doc/politica de proteccion de datos personale.pdf" class="text-secondary text-decoration-none">Política de privacidad</a>
                         </li>
                         <li class="mb-2">
-                            <a href="https://wa.me/573193162268?text=Hola%20" class="text-secondary text-decoration-none">Soporte</a>
+                            <a href="assets/doc/tyc-v4.pdf" class="text-secondary text-decoration-none">Política de privacidad</a>
+                        </li>                        
+                        <li class="mb-2">
+                            <a href="https://wa.me/573202925348?text=Hola%20" class="text-secondary text-decoration-none">Soporte</a>
                         </li>
+                        <li class="mb-2">
+                            <button class="btn btn-warning"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#modalBuscarTickets">
+                                Mis tickets 🎫🔍
+                            </button>
+                        </li>                       
                     </ul>
                 </div>
 
@@ -526,10 +561,10 @@ $porcentaje_venta = 80.2;
                 <div class="col-md-4">
                     <h6 class="fw-bold text-uppercase mb-3">Contacto</h6>
                     <p class="small text-secondary mb-2">
-                        <i class="ti ti-phone me-2"></i> (+57) 319 316 2268
+                        <i class="ti ti-phone me-2"></i> (+57) 320 292 5348
                     </p>
                     <p class="small text-secondary mb-2">
-                        <i class="ti ti-mail me-2"></i> contacto@caballosrevelo.com
+                        <i class="ti ti-mail me-2"></i> info@apfenix.com
                     </p>
                     <p class="small text-secondary">
                         <i class="ti ti-map-pin me-2"></i> Colombia
@@ -549,24 +584,24 @@ $porcentaje_venta = 80.2;
 
             <!-- Redes en Mobile -->
             <div class="d-flex d-md-none justify-content-center gap-3 mb-3">
-                <a href="https://www.instagram.com/caballosrevelo" class="btn btn-outline-light rounded-circle">
+                <a href="https://www.instagram.com/angelica_paez00?igsh=MTNvdGJmNnpxd2xxaw%3D%3D&utm_source=qr" class="btn btn-outline-light rounded-circle">
                     <i class="ti ti-brand-instagram"></i>
                 </a>
-                <a href="https://wa.me/57573193162268?text=Hola%20" class="btn btn-outline-success rounded-circle">
+                <a href="https://wa.me/573202925348?text=Hola%20" class="btn btn-outline-success rounded-circle">
                     <i class="ti ti-brand-whatsapp"></i>
                 </a>
-                <a href="https://www.facebook.com/alvaro.gomez.329481/" class="btn btn-outline-primary rounded-circle">
+                <a href="" class="d-none btn btn-outline-primary rounded-circle">
                     <i class="ti ti-brand-facebook"></i>
                 </a>
             </div>
 
             <!-- Copyright -->
             <div class="text-center small text-secondary pb-2">
-                © <?= date('Y'); ?> Caballos Revelo · Todos los derechos reservados <br>
+                © <?= date('Y'); ?> El dia de TU SUERTE · Todos los derechos reservados <br>
             Desarrollado con ❤️ por 
             <strong class="text-warning">
               <a 
-                href="https://wa.me/573245894268?text=Hola%20vi%20la%20p%C3%A1gina%20de%20de%20Caballos%20Revelo%20y%20quiero%20obtener%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20sistema%20de%20rifas"
+                href="https://wa.me/573245894268?text=Hola%20vi%20la%20p%C3%A1gina%20de%20EDTS%20y%20quiero%20obtener%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20sistema%20"
                 target="_blank"
                 rel="noopener"
                 class="text-warning"
@@ -598,6 +633,35 @@ $porcentaje_venta = 80.2;
         </button>
     </div>
 
+    <!-- MODAL SEARCH TICKETS -->
+    <div class="modal fade" id="modalBuscarTickets" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4">
+
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold">🔍 Buscar mis tickets</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body text-center">
+                    <input type="tel"
+                        id="inputBuscarTickets"
+                        class="form-control text-center mb-3"
+                        placeholder="Ej: 3001234567">
+
+                    <button class="btn btn-warning w-100 fw-bold"
+                            onclick="buscarTickets()">
+                        Buscar
+                    </button>
+
+                    <div id="resultadoBusqueda" class="mt-3"></div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>    
+
 
     <!-- SCRIPTS -->
     <script src="<?= ASSETS_URL ?>/libs/jquery/dist/jquery.min.js"></script>
@@ -606,6 +670,9 @@ $porcentaje_venta = 80.2;
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="assets/js/departamentos-ciudades.js"></script>
     <script src="assets/js/frontend.js"></script>
+    <script src="assets/js/buscarTickets.js"></script>
+    
+
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -690,19 +757,93 @@ $porcentaje_venta = 80.2;
                             </div>
                         </div>
 
+                        <hr>
+
+                        <h6 class="fw-bold mb-3">Método de Pago</h6>
+                            <button type="button"
+                                class="btn btn-outline-dark w-50 fw-bold"
+                                data-metodo="pse"
+                                onclick="seleccionarMetodo('pse')">
+                                💳 PSE
+                            </button>
+
+                            <button type="button"
+                                class="btn btn-outline-success w-50 fw-bold"
+                                data-metodo="transferencia"
+                                onclick="seleccionarMetodo('transferencia')">
+                                🏦 Transferencia
+                            </button>                        
+                    <div id="contenedorMetodoPago">
+
+                    <!-- PSE -->
+                    <div id="metodoPSE" class="metodo-pago d-none">
                         <button type="button"
-                            id="btnPagarFinal"
                             class="btn btn-warning w-100 py-3 fw-bold text-uppercase shadow-sm"
                             onclick="iniciarPagoPSE()">
-                        
-                            <span class="btn-text">
-                                Ir a Pagar Ahora <i class="ti ti-credit-card ms-1"></i>
-                            </span>
-                        
-                            <span class="spinner-border spinner-border-sm ms-2 d-none"
-                                  role="status"
-                                  aria-hidden="true"></span>
+
+                            Ir a pagar con PSE 💳
                         </button>
+                    </div>
+
+                    <!-- TRANSFERENCIA -->
+                    <div id="metodoTransferencia" class="metodo-pago d-none">
+
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-body">
+
+                                <h6 class="fw-bold text-success mb-3">
+                                    💸 Datos para Transferencia
+                                </h6>
+
+
+                                <!-- BANCOLOMBIA -->
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <div>
+                                        <strong>Bancolombia</strong><br>
+                                        <span id="bancolombia">68005493483</span><br>
+                                        <small class="text-muted">Angélica Paez</small>
+                                    </div>
+                                    <button type="button" class="btn btn-sm btn-outline-dark"
+                                        onclick="copiarTexto('bancolombia')">
+                                        Copiar
+                                    </button>
+                                </div>
+
+                                <!-- LLAVE -->
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <div>
+                                        <strong>Llave Breve 🔑</strong><br>
+                                        <span id="llave">@ngelicap5037</span><br>
+                                        <small class="text-muted">Angélica Paez</small>
+                                    </div>
+                                    <button type="button" class="btn btn-sm btn-outline-dark"
+                                        onclick="copiarTexto('llave')">
+                                        Copiar
+                                    </button>
+                                </div>
+
+                                <hr>
+
+                                <label class="fw-bold mb-2">📤 Subir comprobante</label>
+
+                                <input type="file"
+                                    class="form-control mb-3"
+                                    id="comprobantePago"
+                                    accept="image/*,application/pdf">
+
+                                <button type="button"
+                                    class="btn btn-success w-100 fw-bold"
+                                    onclick="procesarTransferencia(event)">
+
+                                    Confirmar pago 🚀
+                                </button>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>                    
 
                     </form>
                     <div class="mt-3 pt-3 border-top text-center">
@@ -712,7 +853,6 @@ $porcentaje_venta = 80.2;
                         </p>
                         <div class="d-flex justify-content-center align-items-center gap-3 grayscale-hover">
                             <img src="assets/images/logos/pse.png" alt="PSE" style="height: 40px; width: auto;">
-                            <!--<img src="assets/images/logos/open.jpg" alt="OpenPay" style="height: 40px; width: auto;">-->
                         </div>
                     </div>
                 </div>
@@ -723,6 +863,7 @@ $porcentaje_venta = 80.2;
 
 <?php
 include "includes/preloader.php";
+include "includes/btn-share.php";
 ?>
     
 </body>

@@ -104,9 +104,10 @@ include_once ROOT_PATH . "/includes/head.php";
                         <div class="col-md-6 mb-3">
                             <label class="form-label small fw-bold">Cifras <span class="text-danger">*</span></label>
                             <select class="form-select" id="cifras" required>
-                                <option value="2">2 Cifras (100 boletos)</option>
-                                <option value="3">3 Cifras (1.000 boletos)</option>
-                                <option value="4" selected>4 Cifras (10.000 boletos)</option>
+                                <option value="2">2 Cifras (100 Núnms)</option>
+                                <option value="3">3 Cifras (1.000 Núnms)</option>
+                                <option value="4">4 Cifras (10.000 Núnms)</option>
+                                <option value="5">5 Cifras (100.000 Núnms)</option>
                             </select>
                         </div>
                     </div>

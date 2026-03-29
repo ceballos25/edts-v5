@@ -49,6 +49,13 @@ function isOpen($files, $currentPage) {
           </a>
         </li>
 
+        <li class="sidebar-item <?= isActive('transferencias.php', $currentPage); ?>">
+          <a class="sidebar-link" href="transferencias.php" aria-expanded="false">
+            <i class="ti ti-building-bank"></i>
+            <span class="hide-menu">Transferencias</span>
+          </a>
+        </li>        
+
         <li><span class="sidebar-divider lg"></span></li>
 
         <!-- CLIENTES / PROVEEDORES -->
@@ -130,6 +137,13 @@ function isOpen($files, $currentPage) {
             <span class="hide-menu">Rifas</span>
           </a>          
         </li>
+
+        <li class="sidebar-item <?= isActive('settings.php', $currentPage); ?>">
+          <a class="sidebar-link" href="settings.php" aria-expanded="false">
+            <i class="ti ti-credit-card"></i>
+            <span class="hide-menu">Ajustes</span>
+          </a>          
+        </li>        
 
         <li><span class="sidebar-divider lg"></span></li>
 

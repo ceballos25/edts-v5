@@ -134,13 +134,13 @@ class DashboardController {
         $response['ultimasVentas'] = array_slice($ventas, 0, 10);
 
         // KPIs STOCK & CLIENTES (Consultas ligeras)
-        $paramsTickets = ['select' => 'id_ticket', 'linkTo' => 'status_ticket', 'equalTo' => '0', 'startAt' => 0, 'endAt' => 50000];
+        $paramsTickets = ['select' => 'id_ticket', 'linkTo' => 'status_ticket', 'equalTo' => '0', 'startAt' => 0, 'endAt' => 100000];
         if (!empty($idRaffle)) { $paramsTickets['linkTo'] = 'id_raffle_ticket,status_ticket'; $paramsTickets['equalTo'] = $idRaffle . ',0'; }
         $resTickets = ApiRequest::get("tickets", $paramsTickets);
         $response['kpis']['numerosDisponibles'] = (ApiRequest::isSuccess($resTickets) && !empty($resTickets->results)) 
             ? count(is_array($resTickets->results) ? $resTickets->results : [$resTickets->results]) : 0;
 
-        $resCust = ApiRequest::get("customers", ['select' => 'id_customer', 'startAt' => 0, 'endAt' => 50000]);
+        $resCust = ApiRequest::get("customers", ['select' => 'id_customer', 'startAt' => 0, 'endAt' => 100000]);
         $response['kpis']['totalClientes'] = (ApiRequest::isSuccess($resCust) && !empty($resCust->results)) 
             ? count(is_array($resCust->results) ? $resCust->results : [$resCust->results]) : 0;
 

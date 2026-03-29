@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title><?php echo isset($page_title) ? $page_title . ' - ' . SITE_NAME : 'CABALLOS REVELO'; ?></title>
+  <title><?php echo isset($page_title) ? $page_title . ' - ' . SITE_NAME : 'El dia de TU SUERTE 🍀'; ?></title>
   <link rel="shortcut icon" type="image/png" href="<?= ASSETS_URL ?>/images/logos/logo.ico" />
   <link rel="stylesheet" href="<?= ASSETS_URL ?>/css/styles.min.css" />
   <!-- AlertifyJS -->

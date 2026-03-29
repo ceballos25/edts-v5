@@ -16,6 +16,35 @@ const estado = {
     }
 };
 
+    document.addEventListener('DOMContentLoaded', function () {
+    var main = new Splide('#main-carousel', {
+        type: 'fade',
+        rewind: true,
+        pagination: false,
+        arrows: true,
+    });
+
+    var thumbnails = new Splide('#thumbnail-carousel', {
+        fixedWidth: 90,
+        fixedHeight: 60,
+        gap: 10,
+        rewind: true,
+        pagination: false,
+        isNavigation: true,
+        focus: 'center',
+        cover: true,
+        breakpoints: {
+        600: {
+            fixedWidth: 60,
+            fixedHeight: 44,
+        },
+        },
+    });
+
+    main.sync(thumbnails);
+    main.mount();
+    thumbnails.mount();
+    });
 
 /* ================== INIT ================== */
 
@@ -150,8 +179,8 @@ $('#cantidadManual').on('blur', function () {
 
 function obtenerPrecioUnitario(cantidad) {
 
-    return cantidad >= 3
-        ? 500
+    return cantidad >= 20
+        ? 100
         : estado.rifa.precio;
 
 }
@@ -161,7 +190,7 @@ function actualizarPrecioVisual(cantidad) {
     if (cantidad >= 3) {
 
         $('#precioBoletaDisplay').html(
-            `$8.000 <small class="text-muted fs-6">c/u · PROMO 🔥</small>`
+            `$8.000 <small class="text-white fs-6">c/u · PROMO 🔥</small>`
         );
 
     } else {
@@ -539,4 +568,174 @@ if (!estado.cantidadSeleccionada || estado.cantidadSeleccionada < 3) {
 
     return datos;
 
+}
+
+async function seleccionarMetodo(tipo) {
+
+    const pse = document.getElementById('metodoPSE');
+    const transferencia = document.getElementById('metodoTransferencia');
+
+    const metodos = [pse, transferencia];
+
+    // ocultar
+    metodos.forEach(el => {
+        el.classList.remove('show');
+        el.classList.add('d-none');
+    });
+
+    // botones activos
+    document.querySelectorAll('[data-metodo]').forEach(btn => {
+        btn.classList.remove('active');
+    });
+
+    const btnActivo = document.querySelector(`[data-metodo="${tipo}"]`);
+    if (btnActivo) btnActivo.classList.add('active');
+
+    // 🔥 SOLO TRANSFERENCIA CREA RESPALDO
+    if (tipo === 'transferencia') {
+
+        const ok = await crearRespaldoTransferencia();
+        if (!ok) return;
+
+    }
+
+    const target = tipo === 'pse' ? pse : transferencia;
+
+    target.classList.remove('d-none');
+
+    requestAnimationFrame(() => {
+        target.classList.add('show');
+    });
+}
+
+async function procesarTransferencia(e) {
+
+    e.preventDefault();
+
+    const datos = validarFormularioCheckout();
+    if (!datos) return;
+
+    const file = document.getElementById('comprobantePago').files[0];
+
+    if (!file) {
+        toastError("Debes subir el comprobante");
+        return;
+    }
+
+    if (estado.cantidadSeleccionada < 3) {
+        toastError("Mínimo 3 números");
+        return;
+    }
+
+    const total =
+        estado.cantidadSeleccionada *
+        obtenerPrecioUnitario(estado.cantidadSeleccionada);
+
+    const formData = new FormData();
+
+    formData.append('action', 'crear_transferencia_completa');
+
+    // 🔥 datos compra
+    formData.append('id_raffle', estado.rifa.id);
+    formData.append('quantity', estado.cantidadSeleccionada);
+    formData.append('amount', total);
+
+    // 🔥 cliente
+    formData.append('name_customer', datos.nombre);
+    formData.append('lastname_customer', datos.apellido);
+    formData.append('phone_customer', datos.celular);
+    formData.append('email_customer', datos.email);
+    formData.append('department_customer', datos.departamento);
+    formData.append('city_customer', datos.ciudad);
+
+    // 🔥 archivo
+    formData.append('comprobante', file);
+
+    showPreloader();
+
+    try {
+
+        const res = await fetch('front/ajax/web.ajax.php', {
+            method: 'POST',
+            body: formData
+        });
+
+        const json = await res.json();
+
+        if (!json.success)
+            throw new Error(json.message);
+
+        // 🚀 REDIRECCIÓN FINAL
+        window.location.href = `transferencia.php?code=${json.code_transfer}`;
+
+    } catch (e) {
+
+        toastError(e.message);
+
+    }
+
+    hidePreloader();
+}
+
+function copiarTexto(id) {
+
+    const el = document.getElementById(id);
+
+    if (!el) {
+        console.error("No existe el elemento:", id);
+        return;
+    }
+
+    const texto = el.innerText;
+
+    // ✔️ MÉTODO MODERNO
+    if (navigator.clipboard && window.isSecureContext) {
+
+        navigator.clipboard.writeText(texto)
+            .then(() => mostrarToastCopiado(texto))
+            .catch(() => copiarFallback(texto));
+
+    } else {
+        // ❗ fallback para http o navegadores viejos
+        copiarFallback(texto);
+    }
+}
+
+
+// 🔁 FALLBACK UNIVERSAL
+function copiarFallback(texto) {
+
+    const textarea = document.createElement("textarea");
+    textarea.value = texto;
+    textarea.style.position = "fixed";
+    textarea.style.opacity = "0";
+
+    document.body.appendChild(textarea);
+    textarea.focus();
+    textarea.select();
+
+    try {
+        document.execCommand("copy");
+        mostrarToastCopiado(texto);
+    } catch (err) {
+        alert("No se pudo copiar automáticamente 😢");
+    }
+
+    document.body.removeChild(textarea);
+}
+
+
+// 🎯 TOAST BONITO
+function mostrarToastCopiado(texto) {
+    Toastify({
+        text: "Copiado: " + texto,
+        duration: 2000,
+        gravity: "top",
+        position: "center",
+        backgroundColor: "#28a745"
+    }).showToast();
+}
+
+async function crearRespaldoTransferencia() {
+    return true; // TEMPORAL para probar
 }

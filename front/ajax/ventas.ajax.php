@@ -21,9 +21,10 @@ const ALLOWED_ACTIONS = [
     'obtener_por_codigo'  => ['VentasController', 'obtenerVentaPorCodigo', ['code_sale' => null]],
     'obtener_disponibles' => ['VentasController', 'obtenerTicketsDisponibles', ['id_raffle' => 0]],
     'detalle_venta'       => ['VentasController', 'obtenerDetalleVenta', ['id_sale' => null]],
-
-    // NumerosController (Aquí redirigimos la petición antigua al controlador nuevo)
-    'numeros_vendidos'    => ['NumerosController', 'obtenerNumerosVendidos', []] 
+    'obtener_por_celular' => ['VentasController', 'buscarTicketsPorCelular', ['phone_customer' => null]],    
+    'numeros_vendidos'    => ['NumerosController', 'obtenerNumerosVendidos', []],
+    'obtener_admins' => ['VentasController', 'obtenerAdmins', []],    
+    'anular' => ['VentasController', 'anularVenta', ['id_sale' => null]]
 ];
 
 try {

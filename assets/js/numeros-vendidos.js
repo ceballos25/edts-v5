@@ -137,7 +137,7 @@ function renderTabla(datos) {
 
             <td class="py-3 text-center">
                 <div class="d-inline-flex align-items-center justify-content-center rounded shadow-sm" 
-                     style="background-color: #1a1a1a; color: #d4af37; border: 1px solid #d4af37; width: 45px; height: 45px;">
+                     style="background-color: #f5f5f5; color: #000; border: 1px solid #d500f9; width: 50px; height: 38px;"
                     <span class="fw-bold" style="font-size: 1rem; letter-spacing: 0.5px;">
                         ${t.number_ticket}
                     </span>

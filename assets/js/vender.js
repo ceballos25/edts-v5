@@ -323,7 +323,7 @@ async function procesarVenta() {
         `¿Deseas registrar la venta de <b>${estado.cantidadSeleccionada}</b> números?`,
         async function () {
 
-            const codigoVenta = "CR-" + Date.now() + Math.floor(Math.random() * 100);
+            const codigoVenta = "AP" + Date.now() + Math.floor(Math.random() * 100);
 
             btnD.disabled = true;
             btnD.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Procesando...';
