@@ -46,7 +46,7 @@
     }
 
     .navbar-custom {
-        background-color: #050505;
+        background-color: #000000;
         border-bottom: 2px solid var(--gold);
     }
 
@@ -411,7 +411,7 @@
 
     /* Aseguramos que el Nav esté SIEMPRE encima de todo */
     .navbar-custom {
-        background-color: #050505;
+        background-color: #000000;
         /* Fondo sólido (sin transparencia) para que nada se vea detrás */
         border-bottom: 2px solid var(--gold);
         z-index: 1050 !important;
@@ -547,12 +547,48 @@
         text-align: center;
     }
 
-    .progress-bar {
-        background-color: #ffbc42 !important;
-    }
+/* CONTENEDOR */
+.progress {
+    height: 18px;
+    border-radius: 20px;
+    background-color: #0f172a; /* fondo oscuro elegante */
+    border: 1px solid rgba(0, 255, 0, 0.3);
+    overflow: hidden;
+}
 
-    .progress.my-2 {
-    border: 1px #ffbc42 solid;
+/* BARRA */
+.progress-bar {
+    background: linear-gradient(
+        90deg,
+        #00ff88,
+        #00ff00,
+        #00cc66
+    ) !important;
+
+    font-weight: bold;
+    font-size: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #003300;
+
+    /* Glow 🔥 */
+    box-shadow: 
+        0 0 8px rgba(0, 255, 0, 0.7),
+        0 0 16px rgba(0, 255, 0, 0.4);
+
+    /* Animación suave */
+    transition: width 0.8s ease-in-out;
+
+    border-radius: 20px;
+}
+
+
+@keyframes shine {
+    0% { left: -40%; }
+    100% { left: 120%; }
 }
 
 

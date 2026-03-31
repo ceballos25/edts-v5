@@ -1,6 +1,5 @@
 <?php
 require_once "config/config.php";
-$porcentaje_venta = 10.2;
 ?>
 <!doctype html>
 <html lang="es">
@@ -77,7 +76,7 @@ $porcentaje_venta = 10.2;
 
             </div>
             <span class="badge bg-dark text-light px-3 py-2 d-none d-lg-inline">
-                <i class="ti ti-calendar-event me-1"></i> Juega el 01 de Mayo por la de mayor de Medellín 🎫
+                <i class="ti ti-calendar-event me-1"></i> Evento el 01 de Mayo por la de de Medellín 🎫
             </span>
         </div>
     </nav>
@@ -231,17 +230,15 @@ $porcentaje_venta = 10.2;
                         <div class="card-body">
 
                             <div class="d-flex justify-content-between fw-bold">
-                                <span>🔥 Total Números vendidos
-                                </span>
-                                <span>
-                                    <?= $porcentaje_venta ?>%
-                                </span>
+                                <span>🔥 Total Stickers vendidos</span>
+                                <span id="porcentajeTexto">0%</span>
                             </div>
 
                             <div class="progress my-2">
-                                <!-- <div class="progress-bar bg- progress-bar-striped progress-bar-animated"
-                                    style="width:<?= $porcentaje_venta ?>%">
-                                </div> -->
+                                <div id="barraProgreso"
+                                    class="progress-bar progress-bar-striped progress-bar-animated"
+                                    style="width: 0%">
+                                </div>
                             </div>
 
                         </div>
@@ -313,7 +310,7 @@ $porcentaje_venta = 10.2;
                                 <!-- 4 -->
                                 <div class="col-6 col-md-4">
                                     <input type="radio" class="btn-check paquete-radio" name="paqueteNumeros" id="paq4"
-                                        value="30">
+                                        value="27">
                                     <label
                                         class="btn btn-outline-primary w-100 py-2 d-flex flex-column align-items-center justify-content-center paquete-card"
                                         for="paq4">
@@ -326,7 +323,7 @@ $porcentaje_venta = 10.2;
                                 <!-- 5 -->
                                 <div class="col-6 col-md-4">
                                     <input type="radio" class="btn-check paquete-radio" name="paqueteNumeros" id="paq5"
-                                        value="50">
+                                        value="35">
                                     <label
                                         class="btn btn-outline-primary w-100 py-2 d-flex flex-column align-items-center justify-content-center paquete-card popular"
                                         for="paq5">
@@ -343,7 +340,7 @@ $porcentaje_venta = 10.2;
                                 <!-- 7 -->
                                 <div class="col-6 col-md-4">
                                     <input type="radio" class="btn-check paquete-radio" name="paqueteNumeros" id="paq7"
-                                        value="70">
+                                        value="50">
                                     <label
                                         class="btn btn-outline-primary w-100 py-2 d-flex flex-column align-items-center justify-content-center paquete-card recomendado"
                                         for="paq7">
@@ -417,7 +414,7 @@ $porcentaje_venta = 10.2;
                             </div>
 
                             <div class="alert alert-warning text-center small fw-bold mt-3">
-                                🎯 Más números = más oportunidades de ganar
+                                🎯 Más stickers = más oportunidades de ganar
                             </div>
 
                         </div>
@@ -529,17 +526,25 @@ $porcentaje_venta = 10.2;
 
                     <!-- Redes (desktop) -->
                     <div class="d-none d-md-flex gap-2 mt-3">
-                        <a href="https://www.instagram.com/angelica_paez00" target="_blank"
-                            class="btn btn-outline-light btn-sm rounded-circle">
+
+                        <a
+                        target="_blank"
+                        class="social-instagram btn btn-outline-light btn-sm rounded-circle d-none">
                             <i class="ti ti-brand-instagram"></i>
                         </a>
-                        <a href="https://wa.me/573202925348?text=Hola%20" target="_blank"
-                            class="btn btn-outline-success btn-sm rounded-circle">
+
+                        <a 
+                        target="_blank"
+                        class="social-whatsapp btn btn-outline-success btn-sm rounded-circle d-none">
                             <i class="ti ti-brand-whatsapp"></i>
                         </a>
-                        <a href="" target="_blank" class="btn btn-outline-primary btn-sm rounded-circle d-none">
+
+                        <a
+                        target="_blank"
+                        class="social-facebook btn btn-outline-primary btn-sm rounded-circle d-none">
                             <i class="ti ti-brand-facebook"></i>
                         </a>
+
                     </div>
                 </div>
 
@@ -564,7 +569,7 @@ $porcentaje_venta = 10.2;
                         </li>
                         <li class="mb-2">
                             <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalBuscarTickets">
-                                Mis tickets 🎫🔍
+                                Mis Stickers 🎫🔍
                             </button>
                         </li>
                     </ul>
@@ -574,10 +579,10 @@ $porcentaje_venta = 10.2;
                 <div class="col-md-4">
                     <h6 class="fw-bold text-uppercase mb-3">Contacto</h6>
                     <p class="small text-secondary mb-2">
-                        <i class="ti ti-phone me-2"></i> (+57) 320 292 5348
+                        <i class="ti ti-phone me-2"></i> (+57) 318 009 0749
                     </p>
                     <p class="small text-secondary mb-2">
-                        <i class="ti ti-mail me-2"></i> info@apfenix.com
+                        <i class="ti ti-mail me-2"></i> info@eldiadetusuerte.com
                     </p>
                     <p class="small text-secondary">
                         <i class="ti ti-map-pin me-2"></i> Colombia
@@ -596,18 +601,28 @@ $porcentaje_venta = 10.2;
             <hr class="border-secondary my-4">
 
             <!-- Redes en Mobile -->
-            <div class="d-flex d-md-none justify-content-center gap-3 mb-3">
-                <a href="https://www.instagram.com/angelica_paez00?igsh=MTNvdGJmNnpxd2xxaw%3D%3D&utm_source=qr"
-                    class="btn btn-outline-light rounded-circle">
-                    <i class="ti ti-brand-instagram"></i>
-                </a>
-                <a href="https://wa.me/573202925348?text=Hola%20" class="btn btn-outline-success rounded-circle">
-                    <i class="ti ti-brand-whatsapp"></i>
-                </a>
-                <a href="" class="d-none btn btn-outline-primary rounded-circle">
-                    <i class="ti ti-brand-facebook"></i>
-                </a>
-            </div>
+                <div class="d-flex d-md-none justify-content-center gap-3 mb-3">
+
+                    <a
+                    target="_blank"
+                    class="social-instagram btn btn-outline-light rounded-circle d-none">
+                        <i class="ti ti-brand-instagram"></i>
+                    </a>
+
+                    <a
+                    target="_blank"
+                    class="social-whatsapp btn btn-outline-success rounded-circle d-none">
+                        <i class="ti ti-brand-whatsapp"></i>
+                    </a>
+
+                    <a
+                    target="_blank"
+                    class="social-facebook btn btn-outline-primary rounded-circle d-none">
+                        <i class="ti ti-brand-facebook"></i>
+                    </a>
+
+                </div>
+
 
             <!-- Copyright -->
             <div class="text-center small text-secondary pb-2">
@@ -650,7 +665,7 @@ $porcentaje_venta = 10.2;
             <div class="modal-content rounded-4">
 
                 <div class="modal-header">
-                    <h5 class="modal-title fw-bold">🔍 Buscar mis tickets</h5>
+                    <h5 class="modal-title fw-bold">🔍 Buscar mis stickers</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
 
@@ -677,6 +692,7 @@ $porcentaje_venta = 10.2;
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="assets/js/departamentos-ciudades.js"></script>
+    <script src="assets/js/settings.js"></script>
     <script src="assets/js/frontend.js"></script>
     <script src="assets/js/buscarTickets.js"></script>
 

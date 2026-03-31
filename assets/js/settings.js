@@ -1,15 +1,30 @@
 // ============================
-// INIT
+// STATE GLOBAL
 // ============================
-document.addEventListener('DOMContentLoaded', () => {
-    cargarSettings();
+let SETTINGS = {};
+let SETTINGS_LOADED = false;
+let SETTINGS_PROMISE = null;
+
+// ============================
+// INIT GLOBAL
+// ============================
+document.addEventListener('DOMContentLoaded', async () => {
+
+    // 🔥 Cargar settings UNA sola vez
+    await cargarSettingsGlobal();
+
+    // 🔥 Solo renderizar si existe la vista settings
+    if (document.getElementById('settingsContainer')) {
+        renderSettingsFromGlobal();
+    }
+
 });
 
 // ============================
 // HELPERS
 // ============================
 function escapeHtml(text) {
-    return String(text)
+    return String(text ?? '')
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
@@ -17,44 +32,85 @@ function escapeHtml(text) {
         .replace(/'/g, "&#039;");
 }
 
-// ============================
-// CARGAR
-// ============================
-async function cargarSettings() {
-
-    if (typeof showPreloader === 'function') showPreloader();
-
-    try {
-        const fd = new FormData();
-        fd.append('action', 'obtener');
-
-        const res = await fetch('ajax/settings.ajax.php', {
-            method: 'POST',
-            body: fd
-        });
-
-        const data = await res.json();
-
-        if (!data.success) {
-            throw new Error("Error cargando settings");
-        }
-
-        renderSettings(data.data || []);
-
-    } catch (e) {
-        console.error(e);
-        alertify.error("Error cargando configuración");
-    } finally {
-        if (typeof hidePreloader === 'function') hidePreloader();
-    }
+function getSetting(key, defaultValue = null) {
+    return SETTINGS[key] ?? defaultValue;
 }
 
 // ============================
-// RENDER
+// FETCH BASE
 // ============================
-function renderSettings(settings) {
+async function fetchSettings(action, extra = {}) {
+
+    const fd = new FormData();
+    fd.append('action', action);
+
+    Object.entries(extra).forEach(([k, v]) => fd.append(k, v));
+
+    const res = await fetch('/front/ajax/settings.ajax.php', {
+        method: 'POST',
+        body: fd
+    });
+
+    return res.json();
+}
+
+// ============================
+// CARGAR GLOBAL (SINGLE SOURCE)
+// ============================
+async function cargarSettingsGlobal() {
+
+    if (SETTINGS_LOADED) return SETTINGS;
+
+    if (SETTINGS_PROMISE) return SETTINGS_PROMISE;
+
+    SETTINGS_PROMISE = (async () => {
+
+        try {
+
+            const data = await fetchSettings('obtener');
+
+            if (!data.success) throw new Error("Error obteniendo settings");
+
+            SETTINGS = {};
+
+            data.data.forEach(s => {
+                SETTINGS[s.key_setting] = s.value_setting;
+            });
+
+            SETTINGS_LOADED = true;
+
+            return SETTINGS;
+
+        } catch (e) {
+            console.error("Error cargando settings:", e);
+            return {};
+        }
+
+    })();
+
+    return SETTINGS_PROMISE;
+}
+
+// ============================
+// READY (SIN setInterval)
+// ============================
+function onSettingsReady(callback) {
+    cargarSettingsGlobal().then(callback);
+}
+
+// ============================
+// RENDER SETTINGS (ADMIN UI)
+// ============================
+function renderSettingsFromGlobal() {
 
     const container = document.getElementById('settingsContainer');
+    if (!container) return;
+
+    const settings = Object.entries(SETTINGS).map(([key, value], i) => ({
+        id_setting: i,
+        key_setting: key,
+        value_setting: value
+    }));
 
     if (!settings.length) {
         container.innerHTML = `<div class="text-center py-5 text-muted">Sin configuración</div>`;
@@ -63,51 +119,24 @@ function renderSettings(settings) {
 
     container.innerHTML = settings.map(s => `
 
-        <div class="row mb-3 align-items-center border-bottom pb-2" id="row-${s.id_setting}">
+        <div class="row mb-3 align-items-center border-bottom pb-2">
             
-            <!-- KEY -->
             <div class="col-md-3">
                 <label class="fw-bold">${escapeHtml(s.key_setting)}</label>
             </div>
 
-            <!-- VALUE -->
             <div class="col-md-5">
                 <input type="text" 
                     class="form-control" 
-                    id="input-${s.id_setting}"
                     data-key="${s.key_setting}" 
-                    value="${escapeHtml(s.value_setting)}"
-                    disabled>
+                    value="${escapeHtml(s.value_setting)}">
             </div>
 
-            <!-- ACCIONES -->
             <div class="col-md-4 text-end">
 
-                <!-- EDITAR -->
-                <button class="btn btn-sm btn-outline-primary me-1" 
-                    onclick="activarEdicion(${s.id_setting})"
-                    id="btn-edit-${s.id_setting}">
-                    <i class="ti ti-pencil"></i>
-                </button>
-
-                <!-- GUARDAR -->
-                <button class="btn btn-sm btn-success me-1 d-none" 
-                    onclick="guardarIndividual(${s.id_setting})"
-                    id="btn-save-${s.id_setting}">
+                <button class="btn btn-sm btn-success me-1"
+                    onclick="guardarIndividualDesdeUI('${s.key_setting}', this)">
                     <i class="ti ti-check"></i>
-                </button>
-
-                <!-- CANCELAR -->
-                <button class="btn btn-sm btn-secondary me-1 d-none" 
-                    onclick="cancelarEdicion(${s.id_setting}, '${escapeHtml(s.value_setting)}')"
-                    id="btn-cancel-${s.id_setting}">
-                    <i class="ti ti-x"></i>
-                </button>
-
-                <!-- ELIMINAR -->
-                <button class="btn btn-sm btn-outline-danger" 
-                    onclick="eliminarSetting(${s.id_setting})">
-                    <i class="ti ti-trash"></i>
                 </button>
 
             </div>
@@ -118,108 +147,60 @@ function renderSettings(settings) {
 }
 
 // ============================
-// EDITAR (ACTIVAR)
+// ACTUALIZAR (GLOBAL)
 // ============================
-function activarEdicion(id) {
+async function actualizarSettings(payload) {
 
-    const input = document.getElementById(`input-${id}`);
-    input.disabled = false;
-    input.focus();
+    const data = await fetchSettings('actualizar', payload);
 
-    document.getElementById(`btn-edit-${id}`).classList.add('d-none');
-    document.getElementById(`btn-save-${id}`).classList.remove('d-none');
-    document.getElementById(`btn-cancel-${id}`).classList.remove('d-none');
+    if (!data.success) {
+        throw new Error(data.message);
+    }
+
+    await cargarSettingsGlobal(); // 🔥 refresh global
+
+    return true;
 }
 
 // ============================
-// CANCELAR
+// GUARDAR INDIVIDUAL (UI)
 // ============================
-function cancelarEdicion(id, originalValue) {
+async function guardarIndividualDesdeUI(key, btn) {
 
-    const input = document.getElementById(`input-${id}`);
-    input.value = originalValue;
-    input.disabled = true;
-
-    document.getElementById(`btn-edit-${id}`).classList.remove('d-none');
-    document.getElementById(`btn-save-${id}`).classList.add('d-none');
-    document.getElementById(`btn-cancel-${id}`).classList.add('d-none');
-}
-
-// ============================
-// GUARDAR INDIVIDUAL
-// ============================
-async function guardarIndividual(id) {
-
-    const input = document.getElementById(`input-${id}`);
-    const key = input.dataset.key;
+    const input = btn.closest('.row').querySelector('[data-key]');
     const value = input.value.trim();
-
-    const fd = new FormData();
-    fd.append('action', 'actualizar');
-    fd.append(key, value);
 
     try {
 
-        const res = await fetch('ajax/settings.ajax.php', {
-            method: 'POST',
-            body: fd
-        });
-
-        const data = await res.json();
-
-        if (!data.success) {
-            throw new Error(data.message);
-        }
+        await actualizarSettings({ [key]: value });
 
         alertify.success("Actualizado");
 
-        input.disabled = true;
-
-        document.getElementById(`btn-edit-${id}`).classList.remove('d-none');
-        document.getElementById(`btn-save-${id}`).classList.add('d-none');
-        document.getElementById(`btn-cancel-${id}`).classList.add('d-none');
-
     } catch (e) {
-        alertify.error(e.message || "Error al actualizar");
+        alertify.error(e.message || "Error");
     }
 }
 
 // ============================
-// GUARDAR MASIVO
+// GUARDAR MASIVO (UI)
 // ============================
 async function guardarSettings() {
 
     const inputs = document.querySelectorAll('[data-key]');
-    const fd = new FormData();
-
-    fd.append('action', 'actualizar');
+    const payload = {};
 
     inputs.forEach(i => {
-        fd.append(i.dataset.key, i.value.trim());
+        payload[i.dataset.key] = i.value.trim();
     });
-
-    if (typeof showPreloader === 'function') showPreloader();
 
     try {
 
-        const res = await fetch('ajax/settings.ajax.php', {
-            method: 'POST',
-            body: fd
-        });
-
-        const data = await res.json();
-
-        if (!data.success) {
-            throw new Error(data.message);
-        }
+        await actualizarSettings(payload);
 
         alertify.success("Configuración actualizada");
-        cargarSettings();
 
     } catch (e) {
-        alertify.error(e.message || "Error al guardar");
-    } finally {
-        if (typeof hidePreloader === 'function') hidePreloader();
+        alertify.error(e.message || "Error");
     }
 }
 
@@ -236,36 +217,27 @@ async function crearSetting() {
         return;
     }
 
-    // normalización
     key = key.toLowerCase().replace(/\s+/g, '_');
-
-    const fd = new FormData();
-    fd.append('action', 'crear');
-    fd.append('key_setting', key);
-    fd.append('value_setting', value);
 
     try {
 
-        const res = await fetch('ajax/settings.ajax.php', {
-            method: 'POST',
-            body: fd
+        const data = await fetchSettings('crear', {
+            key_setting: key,
+            value_setting: value
         });
 
-        const data = await res.json();
-
-        if (!data.success) {
-            throw new Error(data.message);
-        }
+        if (!data.success) throw new Error(data.message);
 
         alertify.success("Setting creado");
 
         document.getElementById('newKey').value = '';
         document.getElementById('newValue').value = '';
 
-        cargarSettings();
+        await cargarSettingsGlobal();
+        renderSettingsFromGlobal();
 
     } catch (e) {
-        alertify.error(e.message || "Error al crear");
+        alertify.error(e.message || "Error");
     }
 }
 
@@ -276,27 +248,108 @@ async function eliminarSetting(id) {
 
     if (!confirm("¿Eliminar este setting?")) return;
 
-    const fd = new FormData();
-    fd.append('action', 'eliminar');
-    fd.append('id_setting', id);
-
     try {
 
-        const res = await fetch('ajax/settings.ajax.php', {
-            method: 'POST',
-            body: fd
-        });
+        const data = await fetchSettings('eliminar', { id_setting: id });
 
-        const data = await res.json();
-
-        if (!data.success) {
-            throw new Error(data.message);
-        }
+        if (!data.success) throw new Error(data.message);
 
         alertify.success("Eliminado");
-        cargarSettings();
+
+        await cargarSettingsGlobal();
+        renderSettingsFromGlobal();
 
     } catch (e) {
         alertify.error(e.message || "Error al eliminar");
     }
+}
+
+// ============================
+// EXPORT GLOBAL
+// ============================
+window.getSetting = getSetting;
+window.onSettingsReady = onSettingsReady;
+window.cargarSettingsGlobal = cargarSettingsGlobal;
+
+onSettingsReady(() => {
+
+    // INSTAGRAM
+    aplicarRedSocial(
+        '.social-instagram',
+        getSetting('social_instagram_url')
+    );
+
+    // FACEBOOK
+    aplicarRedSocial(
+        '.social-facebook',
+        getSetting('social_facebook_url')
+    );
+
+    // WHATSAPP
+    const whatsappUrl = getSetting('whatsapp_chat_url');
+    const whatsappNum = getSetting('whatsapp');
+
+    let finalWhatsappUrl = whatsappUrl || 
+        (whatsappNum ? `https://wa.me/${whatsappNum}?text=Hola` : null);
+
+    aplicarRedSocial('.social-whatsapp', finalWhatsappUrl);
+
+});
+
+function obtenerPorcentajeFinal(porcentajeBackend) {
+
+    const raw = getSetting('barra');
+
+
+    if (raw === null || raw === undefined) {
+        return porcentajeBackend;
+    }
+
+    const barraSetting = Number(raw);
+
+    if (barraSetting === 0) {
+        return porcentajeBackend;
+    }
+
+    return barraSetting;
+}
+
+function actualizarBarraProgreso(porcentajeBackend) {
+    const porcentaje = obtenerPorcentajeFinal(porcentajeBackend);
+
+    const porcentajeFinal = Math.min(Math.max(porcentaje, 0), 100);
+
+    const barra = document.getElementById('barraProgreso');
+    const texto = document.getElementById('porcentajeTexto');
+
+    if (!barra || !texto) return;
+
+    barra.style.width = porcentajeFinal + '%';
+    texto.innerText = porcentajeFinal + '%';
+}
+
+let porcentajeBackendGlobal = 0;
+
+// Cuando cargas la rifa (ej: desde API)
+function cargarDatosRifa(data) {
+    porcentajeBackendGlobal = Number(data?.porcentaje) || 0;
+
+    // Esperar settings antes de pintar
+    onSettingsReady(() => {
+        actualizarBarraProgreso(porcentajeBackendGlobal);
+    });
+}
+
+onSettingsReady(() => {
+
+});
+
+async function initBarraProgreso() {
+
+    await cargarSettingsGlobal();
+
+    // ⚠️ TEMPORAL (hasta que hagamos el endpoint)
+    const porcentajeBackend = 25;
+
+    actualizarBarraProgreso(porcentajeBackend);
 }

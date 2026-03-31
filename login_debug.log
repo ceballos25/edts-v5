@@ -1,0 +1,29 @@
+=== LOGIN DEBUG 2026-03-31 08:51:05 ===
+URL: http://api.eldiadetusuerte.test/admins?login=true&suffix=admin
+HTTP Code: 400
+Curl Error: 
+Response: {
+    "status": 400,
+    "results": "Wrong password"
+}
+
+=== LOGIN DEBUG 2026-03-31 08:51:17 ===
+URL: http://api.eldiadetusuerte.test/admins?login=true&suffix=admin
+HTTP Code: 200
+Curl Error: 
+Response: {
+    "status": 200,
+    "results": [
+        {
+            "id_admin": 2,
+            "email_admin": "admin",
+            "rol_admin": null,
+            "token_admin": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzQ5NjUwNzcsImV4cCI6MTc3NTA1MTQ3NywiZGF0YSI6eyJpZCI6MiwiZW1haWwiOiJhZG1pbiJ9fQ.BRv6EpyTyDtyHYPEHV72SKoJIkhKdpT1FGMH7rKF_FQ",
+            "token_exp_admin": 1775051477,
+            "status_admin": 1,
+            "date_created_admin": "2026-03-03",
+            "date_updated_admin": "2026-03-30 19:25:41"
+        }
+    ]
+}
+

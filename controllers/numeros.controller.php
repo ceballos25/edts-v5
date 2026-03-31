@@ -128,5 +128,56 @@ class NumerosController {
 
         return ['success' => true, 'data' => array_values($acumulado)];
     }
+
+    public static function obtenerProgreso($idRaffle) {
+
+        if (empty($idRaffle)) {
+            return ['success' => false, 'message' => 'ID de rifa requerido'];
+        }
+
+        try {
+
+            // 🔹 TOTAL
+            $totalRes = ApiRequest::get(self::TABLE, [
+                'linkTo'  => 'id_raffle_ticket',
+                'equalTo' => $idRaffle,
+                'select'  => 'id_ticket'
+            ]);
+
+            $total = (ApiRequest::isSuccess($totalRes) && !empty($totalRes->results))
+                ? count(is_array($totalRes->results) ? $totalRes->results : [$totalRes->results])
+                : 0;
+
+            // 🔹 VENDIDOS
+            $vendidosRes = ApiRequest::get(self::TABLE, [
+                'linkTo'  => 'id_raffle_ticket,status_ticket',
+                'equalTo' => $idRaffle . ',1',
+                'select'  => 'id_ticket'
+            ]);
+
+            $vendidos = (ApiRequest::isSuccess($vendidosRes) && !empty($vendidosRes->results))
+                ? count(is_array($vendidosRes->results) ? $vendidosRes->results : [$vendidosRes->results])
+                : 0;
+
+            // 🔹 PORCENTAJE
+            $porcentaje = $total > 0
+                ? round(($vendidos * 100) / $total, 2)
+                : 0;
+
+            return [
+                'success' => true,
+                'total' => $total,
+                'vendidos' => $vendidos,
+                'porcentaje' => $porcentaje
+            ];
+
+        } catch (Exception $e) {
+
+            return [
+                'success' => false,
+                'message' => $e->getMessage()
+            ];
+        }
+    }    
 }
 ?>

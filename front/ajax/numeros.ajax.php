@@ -11,7 +11,8 @@ require_once "../../controllers/rifas.controller.php";
 const ALLOWED_ACTIONS = [
     'obtener_inventario' => ['NumerosController', 'obtenerInventario', []],
     'obtener_rifas'      => ['RifasController', 'obtenerRifas', []],
-    'cambiar_estado'     => ['NumerosController', 'cambiarEstado', ['id_ticket' => 0, 'status' => 0]]
+    'cambiar_estado'     => ['NumerosController', 'cambiarEstado', ['id_ticket' => 0, 'status' => 0]],
+    'obtener_progreso'   => ['NumerosController', 'obtenerProgreso', ['id_raffle' => 0]]
 ];
 
 try {

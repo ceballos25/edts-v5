@@ -52,6 +52,7 @@ $(document).ready(function () {
 
     inicializarSistema();
 
+
     $('#celularCliente').on('input paste', function () {
 
         let val = $(this).val().replace(/\D/g, '');
@@ -83,29 +84,23 @@ $(document).ready(function () {
 
 async function inicializarSistema() {
 
-    const fd = new FormData();
-    fd.append('action', 'obtener_rifas');
 
-    const res = await fetch(estado.rutas.numeros, {
-        method: 'POST',
-        body: fd
-    });
+    // 🔥 QUEMADO TEMPORAL
+    estado.rifa.id = 1;
+    estado.rifa.precio = 4000;
 
-    const json = await res.json();
 
-    if (json.success && json.data.length) {
+    actualizarPrecioVisual(0);
 
-        const r = json.data[0];
+    // 🔥 INVENTARIO
+    await cargarInventario();
 
-        estado.rifa.id = r.id_raffle;
-        estado.rifa.precio = parseInt(r.price_raffle, 10);
+    // 🔥 PROGRESO
+    const porcentajeBackend = await cargarPorcentajeBackend();
 
-        actualizarPrecioVisual(0);
-
-        cargarInventario();
-
-    }
-
+    // 🔥 SETTINGS + UI
+    await cargarSettingsGlobal();
+    actualizarBarraProgreso(porcentajeBackend);
 }
 
 
@@ -180,7 +175,7 @@ $('#cantidadManual').on('blur', function () {
 function obtenerPrecioUnitario(cantidad) {
 
     return cantidad >= 20
-        ? 100
+        ? 1000
         : estado.rifa.precio;
 
 }
@@ -738,4 +733,36 @@ function mostrarToastCopiado(texto) {
 
 async function crearRespaldoTransferencia() {
     return true; // TEMPORAL para probar
+}
+
+
+function aplicarRedSocial(selector, url) {
+
+    if (!url) return;
+
+    document.querySelectorAll(selector).forEach(el => {
+        el.href = url;
+        el.classList.remove('d-none');
+    });
+
+}
+
+async function cargarPorcentajeBackend() {
+
+    const fd = new FormData();
+    fd.append('action', 'obtener_progreso');
+    fd.append('id_raffle', estado.rifa.id);
+
+    const res = await fetch(estado.rutas.numeros, {
+        method: 'POST',
+        body: fd
+    });
+
+    const json = await res.json();
+
+    if (!json.success) {
+        return 0;
+    }
+
+    return Number(json.porcentaje) || 0;
 }
