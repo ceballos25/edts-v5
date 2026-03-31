@@ -15,28 +15,33 @@
 
     /* HEADER */
     .promo-bar {
-        /* background: linear-gradient(45deg, #FFD700, #FFA500); */
-        background-color: #2D0434;
-        color: #fff;
+        background-color: #ffbc42;
+        color: #000000;
         font-weight: 800;
         font-size: 0.9rem;
         text-transform: uppercase;
         letter-spacing: 1px;
         position: sticky;
         z-index: 9999;
+        overflow: hidden;
+        /* 🔥 evita que se salga */
+
+        padding: 6px 0;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
     .millonario {
-        color: #d500f9 !important;
+        color: #ffbc42 !important;
+        /* font-size: 30px !important; */
     }
 
     .premio-mayor {
-        border: 1px solid #d500f9;
+        border: 1px solid #0f0;
         color: white !important;
         border-radius: 30px;
         padding: 8px 20px;
         cursor: pointer;
-        box-shadow: 0 0 15px rgba(213, 0, 249, 0.4);
+        box-shadow: 2px 2px 4px #00ff00;
         transition: 0.3s;
     }
 
@@ -61,6 +66,53 @@
     .activo {
         display: flex;
         justify-content: center;
+    }
+
+    .aprovecha {
+        text-transform: math-auto;
+    }
+
+    .valor-anticipado {
+        color: #ffffff;
+        background-color: #e74c3c;
+        padding: 4px 5px;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: bold;
+        margin-left: 10px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+
+    }
+
+    @keyframes scrollText {
+        0% {
+            transform: translateX(0);
+        }
+
+        100% {
+            transform: translateX(-100%);
+        }
+    }
+
+    .promo-track {
+        display: inline-block;
+        white-space: nowrap;
+        animation: scrollText 20s linear infinite;
+        font-style: oblique;
+    }
+
+    @keyframes scrollText {
+        0% {
+            transform: translateX(100%);
+        }
+
+        100% {
+            transform: translateX(-100%);
+        }
+    }
+
+    .logo-principal img {
+        width: 150px;
     }
 
     /* CARRUSEL & PREMIOS */
@@ -172,7 +224,7 @@
     .metodo-pago.show {
         opacity: 1;
         transform: translateY(0);
-    }    
+    }
 
     /* FOOTER */
     footer {
@@ -182,8 +234,8 @@
         border-top: 3px solid var(--gold);
     }
 
-    .border-top{
-        border-top: 1px solid #d500f9 !important;
+    .border-top {
+        border-top: 1px solid #0f0 !important;
     }
 
     footer a {
@@ -364,7 +416,7 @@
         border-bottom: 2px solid var(--gold);
         z-index: 1050 !important;
         /* Capa superior a la tarjeta */
-        
+
         /* Refuerzo */
         /* top: -1px; */
     }
@@ -398,14 +450,20 @@
         transition: transform 0.5s ease;
     }
 
+    /* 
     .splide__slide:hover img {
         transform: scale(1.05);
-    }
+    } */
 
     img.premios-primer-sorteo {
-        height: 500px;
-        width: 450px;
+        height: 550px;
+        width: 397px;
         border-radius: 20px;
+        object-fit: cover;
+    }
+
+    li#main-carousel-slide01.premio-dos-combo img {
+        width: 480px !important;
     }
 
     .ganador {
@@ -467,12 +525,12 @@
         ;
     }
 
-    .title-premio-mayor{
+    .title-premio-mayor {
         color: #000;
     }
 
-    .color-dinero-premio{
-        color: #d500f9 !important;
+    .color-dinero-premio {
+        color: #ffbc42 !important;
     }
 
 
@@ -489,19 +547,28 @@
         text-align: center;
     }
 
-    .progress-bar{
-        background-color: #d500f9 !important;
+    .progress-bar {
+        background-color: #ffbc42 !important;
     }
 
+    .progress.my-2 {
+    border: 1px #ffbc42 solid;
+}
 
-    
+
+
 
     @media (max-width: 768px) {
         img.premios-primer-sorteo {
-            height: 380px;
+            height: auto;
             width: 333px;
             border-radius: 20px;
             object-fit: cover;
+        }
+
+        li#main-carousel-slide01.premio-dos-combo img {
+            width: 390px !important;
+            height: 451px;
         }
 
         .carousel-item img {
@@ -565,7 +632,7 @@
 
         transform: translateY(-3px);
 
-        border-color: #d500f9;
+        border-color: #ffbc42 !important;
 
         box-shadow: 0 8px 20px rgba(0, 0, 0, .08);
 
@@ -578,16 +645,26 @@
 
     .btn-check:checked+.paquete-card {
 
-        background: #d500f9;
-
+        background: #ffbc42 !important;
         border-color: #ffffff;
-        color: #fff !important;
-
+        color: #000000 !important;
         transform: scale(1.03);
-
         box-shadow: 0 10px 24px rgba(212, 204, 204, 0.35);
 
 
+    }
+
+    .bendecidos-numeros {
+        background-color: #007bff;
+        color: #000;
+        padding: 5px;
+        border-radius: 8px;
+        font-weight: bold;
+        border: 2px solid #000;
+        border-style: dotted;
+        /* margin-right: 10px; */
+        display: inline-block;
+        margin-bottom: 4px;
     }
 
 
@@ -628,10 +705,18 @@
 ========================= */
 
     .mas-vendido {
+        border: 2px solid #0f0;
+        box-shadow: #0f0 0px 0px 15px;
+    }
 
-        border: 2px solid #d500f9 !important;
-        box-shadow: rgba(213, 0, 249, 0.4) 0px 0px 15px
+    .mas-vendido:hover {
+        border: #0f0 !important;
+        box-shadow: 0 4px 12px ffbc42 !important;
 
+    }
+
+    .mas-vendido-cintilla {
+        background-color: #ffbc42;
     }
 
 
@@ -640,7 +725,6 @@
     .mas-vendido .badge-paquete {
 
         animation: pulseBadge 2s infinite;
-
     }
 
     @keyframes pulseBadge {
@@ -684,12 +768,12 @@
 
         outline: none;
 
-        border-color: #d500f9;
+        border-color: #ffbc42;
 
         box-shadow: 0 0 0 3px rgba(212, 175, 55, .2);
 
     }
 
     .paquete-card:hover {
-        border: 2px solid #d500f9 !important
+        border: 2px solid #ffbc42 !important
     }
