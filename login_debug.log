@@ -27,3 +27,23 @@ Response: {
     ]
 }
 
+=== LOGIN DEBUG 2026-03-31 14:57:48 ===
+URL: http://api.eldiadetusuerte.test/admins?login=true&suffix=admin
+HTTP Code: 200
+Curl Error: 
+Response: {
+    "status": 200,
+    "results": [
+        {
+            "id_admin": 2,
+            "email_admin": "admin",
+            "rol_admin": null,
+            "token_admin": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzQ5ODcwNjgsImV4cCI6MTc3NTA3MzQ2OCwiZGF0YSI6eyJpZCI6MiwiZW1haWwiOiJhZG1pbiJ9fQ.45Mrm02nwKRnKWENQyh2MiH9pw7TKzPcuH-Z9D3n7fE",
+            "token_exp_admin": 1775073468,
+            "status_admin": 1,
+            "date_created_admin": "2026-03-03",
+            "date_updated_admin": "2026-03-31 08:51:17"
+        }
+    ]
+}
+

@@ -96,31 +96,31 @@ include_once ROOT_PATH . "/includes/head.php";
                                         <input type="radio" class="btn-check paquete-radio" name="paqueteNumeros" id="paq3" value="20">
                                         <label class="btn btn-outline-primary w-100 py-2 d-flex flex-column align-items-center justify-content-center" for="paq3">
                                             <div class="fw-semibold">20 </div>
-                                            <div class="small">$18.000</div>
+                                            <div class="small">$20.000</div>
                                         </label>
                                     </div>
 
                                     <div class="col-6 col-md-4">
-                                        <input type="radio" class="btn-check paquete-radio" name="paqueteNumeros" id="paq4" value="30">
+                                        <input type="radio" class="btn-check paquete-radio" name="paqueteNumeros" id="paq4" value="27">
                                         <label class="btn btn-outline-primary w-100 py-2 d-flex flex-column align-items-center justify-content-center" for="paq4">
-                                            <div class="fw-semibold">30 </div>
+                                            <div class="fw-semibold">27</div>
                                             <div class="small">$27.000</div>
                                         </label>
                                     </div>
 
                                     <div class="col-6 col-md-4">
-                                        <input type="radio" class="btn-check paquete-radio" name="paqueteNumeros" id="paq5" value="50">
+                                        <input type="radio" class="btn-check paquete-radio" name="paqueteNumeros" id="paq5" value="35">
                                         <label class="btn btn-outline-primary w-100 py-2 d-flex flex-column align-items-center justify-content-center" for="paq5">
-                                            <div class="fw-semibold">50</div>
-                                            <div class="small">$45.000</div>
+                                            <div class="fw-semibold">35</div>
+                                            <div class="small">$35.000</div>
                                         </label>
                                     </div>
 
                                     <div class="col-6 col-md-4">
-                                        <input type="radio" class="btn-check paquete-radio" name="paqueteNumeros" id="paq7" value="70">
+                                        <input type="radio" class="btn-check paquete-radio" name="paqueteNumeros" id="paq7" value="50">
                                         <label class="btn btn-outline-primary w-100 py-2 d-flex flex-column align-items-center justify-content-center" for="paq7">
-                                            <div class="fw-semibold">70</div>
-                                            <div class="small">$63.000</div>
+                                            <div class="fw-semibold">50</div>
+                                            <div class="small">$50.000</div>
                                         </label>
                                     </div>
 
@@ -128,7 +128,7 @@ include_once ROOT_PATH . "/includes/head.php";
                                         <input type="radio" class="btn-check paquete-radio" name="paqueteNumeros" id="paq10" value="100">
                                         <label class="btn btn-outline-primary w-100 py-2 d-flex flex-column align-items-center justify-content-center" for="paq10">
                                             <div class="fw-semibold">100</div>
-                                            <div class="small">$90.000</div>
+                                            <div class="small">$100.000</div>
                                         </label>
                                     </div>
 
@@ -136,7 +136,7 @@ include_once ROOT_PATH . "/includes/head.php";
                                         <input type="radio" class="btn-check paquete-radio" name="paqueteNumeros" id="paq20" value="200">
                                         <label class="btn btn-outline-primary w-100 py-2 d-flex flex-column align-items-center justify-content-center" for="paq20">
                                             <div class="fw-semibold">200</div>
-                                            <div class="small">$180.000</div>
+                                            <div class="small">$200.000</div>
                                         </label>
                                     </div>
 

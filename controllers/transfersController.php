@@ -100,7 +100,8 @@ class TransfersController
                     'quantity_transfer' => $cantidad,
                     'amount_transfer' => $data['amount'],
                     'currency_transfer' => 'COP',
-                    'status_transfer' => 1
+                    'status_transfer' => 1,
+                    'source_transfer' => $data['source_transfer']
                 ]
             );
 
@@ -139,9 +140,13 @@ class TransfersController
     $res = ApiRequest::get(self::TABLE, [
         "linkTo" => "code_transfer",
         "equalTo" => $code,
-        "token" => "no",    // <--- Agregado según página 26 de la doc
+        "token" => "no",
         "select" => "*"
     ]);
+
+    // var_dump($code);
+    // var_dump($res);
+    // exit;
 
     if (!ApiRequest::isSuccess($res) || empty($res->results)) {
         return null;
@@ -296,5 +301,27 @@ class TransfersController
         }
 
         return ['success' => true, 'data' => $lista];
-    }   
-}
+    }
+
+    public static function obtenerSettings()
+    {
+        $res = ApiRequest::get("settings", [
+            "select" => "*",
+            "token" => "no"
+        ]);
+
+        if (!ApiRequest::isSuccess($res) || empty($res->results)) {
+            return [];
+        }
+
+        $lista = is_array($res->results) ? $res->results : [$res->results];
+
+        $map = [];
+
+        foreach ($lista as $item) {
+            $map[$item->key_setting] = $item->value_setting;
+        }
+
+        return $map;
+    }
+ }

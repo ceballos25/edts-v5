@@ -128,7 +128,7 @@ if (env('SESSION_AUTO_START') && session_status() === PHP_SESSION_NONE) {
  * Solo protege si NO estamos en páginas públicas
  */
 $currentScript = basename($_SERVER['SCRIPT_FILENAME']);
-$publicPages = ['index.php', 'login.php', 'dash.php', 'index_.php', 'webhook.php', 'numeros.ajax.php', 'ventas.ajax.php', 'web.ajax.php','clientes.ajax.php', 'success.php', 'settings.ajax.php']; // Páginas sin protección
+$publicPages = ['index.php', 'login.php', 'dash.php', 'index_.php', 'webhook.php', 'numeros.ajax.php', 'ventas.ajax.php', 'web.ajax.php','clientes.ajax.php', 'success.php', 'settings.ajax.php', 'transferencias.ajax.php']; // Páginas sin protección
 
 $isPublicPage = in_array($currentScript, $publicPages);
 

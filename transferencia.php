@@ -6,8 +6,10 @@
 require_once 'controllers/transfersController.php';
 
 // 1. CONFIGURACIÓN (Teléfono como string para evitar errores de entero)
-$telefono = "573202925348";
+$settings = TransfersController::obtenerSettings();
+$whatsappUrl = $settings['whatsapp_chat_url'] ?? 'https://api.whatsapp.com/send/?phone=57';
 $code = $_GET['code'] ?? null;
+
 
 // 2. OBTENER DATOS
 $transfer = $code ? TransfersController::obtenerPorCode($code) : null;
@@ -118,7 +120,7 @@ header('Content-Type: text/html; charset=utf-8');
     <script>
     // Centralizamos la info para JS
     const DATA = {
-        phone: "<?= $telefono ?>",
+        whatsappUrl: "<?= $whatsappUrl ?>",
         code: "<?= htmlspecialchars($codigo) ?>"
     };
 
@@ -134,7 +136,7 @@ header('Content-Type: text/html; charset=utf-8');
 
     function abrirWA(texto) {
         const mensaje = encodeURIComponent(texto);
-        const url = `https://api.whatsapp.com/send?phone=${DATA.phone}&text=${mensaje}`;
+        const url = `${DATA.whatsappUrl}&text=${mensaje}`;
         window.open(url, '_blank');
     }
     </script>

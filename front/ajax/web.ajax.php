@@ -123,7 +123,7 @@ if ($action === 'crear_transferencia_completa') {
     /* ===============================
     GUARDAR URL DEL COMPROBANTE
     =============================== */
-    $rutafinal = "https://apfenix.com/" . $rutaRelativa;
+    $rutafinal = "http://eldiadetusuerte.test/" . $rutaRelativa;
     $update = ApiRequest::put(
         "transfers?id={$idTransfer}&nameId=id_transfer&token=no&except=id_transfer&table=transfers&suffix=transfer",
         ["url_transfer" => $rutafinal]

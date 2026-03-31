@@ -10,7 +10,7 @@ class ApiRequest {
         
         $curl = curl_init();
         
-        $base = self::$apiBase ?: (defined('API_BASE') ? API_BASE : 'https://api.apfenix.com');
+        $base = self::$apiBase ?: (defined('API_BASE') ? API_BASE : 'http://api.eldiadetusuerte.test');
 
         curl_setopt_array($curl, [
             CURLOPT_URL => rtrim($base, '/') . '/' . ltrim($url, '/'),

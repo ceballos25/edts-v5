@@ -47,8 +47,12 @@ const estado = {
     });
 
 /* ================== INIT ================== */
-
+let ORIGEN = null;
 $(document).ready(function () {
+        
+    ORIGEN = obtenerOrigenURL();
+
+    console.log('🔥 ORIGEN DETECTADO:', ORIGEN);
 
     inicializarSistema();
 
@@ -87,7 +91,7 @@ async function inicializarSistema() {
 
     // 🔥 QUEMADO TEMPORAL
     estado.rifa.id = 1;
-    estado.rifa.precio = 4000;
+    estado.rifa.precio = 1000;
 
 
     actualizarPrecioVisual(0);
@@ -182,7 +186,7 @@ function obtenerPrecioUnitario(cantidad) {
 
 function actualizarPrecioVisual(cantidad) {
 
-    if (cantidad >= 3) {
+    if (cantidad >= 20) {
 
         $('#precioBoletaDisplay').html(
             `$8.000 <small class="text-white fs-6">c/u · PROMO 🔥</small>`
@@ -425,7 +429,8 @@ async function iniciarPagoPSE() {
         phone_customer: datos.celular,
         email_customer: datos.email,
         department_customer: datos.departamento,
-        city_customer: datos.ciudad
+        city_customer: datos.ciudad,
+        source_payment_backup: ORIGEN,
 
     };
 
@@ -645,6 +650,8 @@ async function procesarTransferencia(e) {
 
     // 🔥 archivo
     formData.append('comprobante', file);
+    //Origen de venta en el campo CP para detectar origen de venta el parametro debe ser CP=cualquier cosa
+    formData.append('source_transfer', ORIGEN);
 
     showPreloader();
 
@@ -765,4 +772,13 @@ async function cargarPorcentajeBackend() {
     }
 
     return Number(json.porcentaje) || 0;
+}
+
+function obtenerOrigenURL() {
+    const params = new URLSearchParams(window.location.search);
+
+    console.log('📦 URL params:', window.location.search);
+    console.log('📦 CP:', params.get('cp'));
+
+    return params.get('cp') || null;
 }

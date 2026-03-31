@@ -28,10 +28,10 @@ class PaymentBackupsController
 
             $cantidad = (int)$data['quantity'];
 
-            if ($cantidad < 3) {
+            if ($cantidad < 20) {
                 return [
                     'success' => false,
-                    'message' => 'La compra mínima es de 3 números'
+                    'message' => 'La compra mínima es de 20 números'
                 ];
             }
 
@@ -102,7 +102,8 @@ class PaymentBackupsController
                     'quantity_payment_backup' => $cantidad,
                     'amount_payment_backup' => $data['amount'],
                     'currency_payment_backup' => 'COP',
-                    'status_payment_backup' => 1
+                    'status_payment_backup' => 1,
+                    'source_payment_backup' => $data['source_payment_backup']
                 ]
             );
 

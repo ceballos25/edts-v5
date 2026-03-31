@@ -101,7 +101,7 @@ if ($orderId) {
         <?= $detalle['html_recibo']; ?>
 
         <div class="mt-4 text-center no-print">
-            <a href="https://apfenix.test"
+            <a href="https://eldiadetusuerte.test"
                class="btn btn-brand px-5 py-3 shadow">
                 Seguir comprando ⚡
             </a>
@@ -151,7 +151,7 @@ if ($orderId) {
             Verificar estado 🔄
         </button>
 
-        <a href="https://apfenix.test"
+        <a href="https://eldiadetusuerte.test"
            class="text-decoration-none text-muted small">
             Volver al inicio
         </a>
@@ -169,7 +169,7 @@ if ($orderId) {
             <p class="text-muted">
                 El enlace no es correcto o ya expiró.
             </p>
-            <a href="https://apfenix.test"
+            <a href="https://eldiadetusuerte.test"
                class="btn btn-brand px-4 py-2">
                 Volver al inicio
             </a>
