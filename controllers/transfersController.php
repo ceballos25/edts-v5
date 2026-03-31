@@ -280,25 +280,27 @@ class TransfersController
 
         $lista = is_array($res->results) ? $res->results : [$res->results];
 
-        foreach ($lista as &$t) {
+foreach ($lista as &$t) {
 
-            // 🔥 TRAER CLIENTE
-            $cliente = ApiRequest::get("customers", [
-                "linkTo" => "id_customer",
-                "equalTo" => $t->id_customer_transfer,
-                "select" => "*"
-            ]);
+    $cliente = ApiRequest::get("customers", [
+        "linkTo" => "id_customer",
+        "equalTo" => $t->id_customer_transfer,
+        "select" => "*"
+    ]);
 
-            if (ApiRequest::isSuccess($cliente) && !empty($cliente->results)) {
-                $c = is_array($cliente->results) ? $cliente->results[0] : $cliente->results;
+    if (ApiRequest::isSuccess($cliente) && !empty($cliente->results)) {
+        $c = is_array($cliente->results) ? $cliente->results[0] : $cliente->results;
 
-                $t->name_customer = $c->name_customer ?? '';
-                $t->lastname_customer = $c->lastname_customer ?? '';
-                $t->phone_customer = $c->phone_customer ?? '';
-                $t->email_customer = $c->email_customer ?? '';
-                $t->city_customer = $c->city_customer ?? '';
-            }
-        }
+        $t->name_customer = $c->name_customer ?? '';
+        $t->lastname_customer = $c->lastname_customer ?? '';
+        $t->phone_customer = $c->phone_customer ?? '';
+        $t->email_customer = $c->email_customer ?? '';
+        $t->city_customer = $c->city_customer ?? '';
+    }
+}
+
+
+return ['success' => true, 'data' => $lista];
 
         return ['success' => true, 'data' => $lista];
     }
@@ -321,6 +323,7 @@ class TransfersController
         foreach ($lista as $item) {
             $map[$item->key_setting] = $item->value_setting;
         }
+        
 
         return $map;
     }

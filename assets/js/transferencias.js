@@ -103,81 +103,63 @@ function renderTabla() {
         return `
         <tr class="align-middle border-bottom">
 
-            <!-- CLIENTE -->
             <td class="py-3 ps-3">
                 <div class="d-flex">
                     <div class="rounded-circle bg-light border d-flex justify-content-center align-items-center text-secondary fw-bold me-3"
                         style="width: 42px; height: 42px;">
                         ${t.name_customer ? t.name_customer.charAt(0).toUpperCase() : 'C'}
                     </div>
-
                     <div class="d-flex flex-column">
                         <span class="fw-bold text-dark text-capitalize">
                             ${t.name_customer || ''} ${t.lastname_customer || ''}
                         </span>
-
-                        <div class="text-muted small mt-1">
-                            <span class="me-2">
-                                <i class="text-secondary ti ti-phone"></i> ${t.phone_customer || '--'}
-                            </span>
-                            <span>
-                                <i class="text-secondary ti ti-map-pin"></i> ${t.city_customer || 'N/A'}
-                            </span>
-                        </div>
-
                         <small class="text-muted">
-                            ${t.email_customer || ''}
+                            <i class="ti ti-phone small"></i> ${t.phone_customer || '--'}
                         </small>
                     </div>
                 </div>
             </td>
 
-            <!-- CODIGO -->
-            <td class="text-secondary">${t.code_transfer}</td>
-
-            <!-- CANTIDAD -->
-            <td>${t.quantity_transfer}</td>
-
-            <!-- TOTAL -->
-            <td>$${Number(t.amount_transfer).toLocaleString('es-CO')}</td>
-
-            <!-- COMPROBANTE -->
             <td>
-                ${
-                    t.url_transfer
-                    ? `<button class="btn btn-sm btn-outline-primary"
-                        onclick="verComprobante('${t.url_transfer}')">
-                        Ver
-                    </button>`
+                <div class="d-flex flex-column">
+                    <span class="fw-bold text-secondary">${t.code_transfer}</span>
+                    <div class="mt-1">
+                        <span class="badge border text-primary bg-light" style="font-size: 0.75rem;">
+                            <i class="ti ti-building-bank"></i> 
+                            ${t.source_transfer ? t.source_transfer.toUpperCase() : 'N/A'}
+                        </span>
+                    </div>
+                </div>
+            </td>
+
+            <td class="fw-bold">${t.quantity_transfer}</td>
+
+            <td class="fw-bold text-dark">$${Number(t.amount_transfer).toLocaleString('es-CO')}</td>
+
+            <td>
+                ${t.url_transfer
+                    ? `<button class="btn btn-sm btn-outline-primary" onclick="verComprobante('${t.url_transfer}')">Ver</button>`
                     : '—'
                 }
             </td>
 
-            <!-- ESTADO -->
             <td>${estadoBadge}</td>
 
-            <!-- FECHA -->
-            <td>${t.date_created_transfer}</td>
+            <td><small class="text-muted">${t.date_created_transfer}</small></td>
 
-            <!-- ACCIONES -->
             <td>
-                ${
-                    t.status_transfer == 1
+                ${t.status_transfer == 1
                     ? `
-                    <button class="btn btn-success btn-sm"
-                        onclick="aprobar(${t.id_transfer})">✔</button>
-
-                    <button class="btn btn-danger btn-sm"
-                        onclick="rechazar(${t.id_transfer})">✖</button>
+                    <button class="btn btn-success btn-sm" onclick="aprobar(${t.id_transfer})">✔</button>
+                    <button class="btn btn-danger btn-sm" onclick="rechazar(${t.id_transfer})">✖</button>
                     `
                     : '—'
                 }
             </td>
-
         </tr>
         `;
     }).join('');
-}
+    }
 
 function limpiarFiltrosTransfer() {
 
