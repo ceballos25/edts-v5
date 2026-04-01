@@ -485,7 +485,11 @@ require_once "config/config.php";
     <div id="ganadores-carousel" class="splide">
         <div class="splide__track">
             <ul class="splide__list">
-
+                <!-- 1 -->
+                <li class="splide__slide text-center">
+                    <p class="ganador-one">Ganador MT15 + 2 Galitos en Girardota🏍️</p>
+                    <img src="assets/images/profile/ganador-girardota.png">
+                </li>
                 <!-- 1 -->
                 <li class="splide__slide text-center">
                     <p class="ganador-one">Combo navideño premio #1 🏍️</p>
@@ -566,7 +570,7 @@ require_once "config/config.php";
     <div id="ganadores-thumbnails" class="splide mt-2">
         <div class="splide__track">
             <ul class="splide__list">
-
+                <li class="splide__slide"><img src="assets/images/profile/ganador-girardota.png"></li>
                 <li class="splide__slide"><img src="assets/images/profile/ganador-combo-navideno-V3.png"></li>
                 <li class="splide__slide"><img src="assets/images/profile/dinamica-twoo-combo.png"></li>
                 <li class="splide__slide"><img src="assets/images/profile/mt-15-nov2.png"></li>
