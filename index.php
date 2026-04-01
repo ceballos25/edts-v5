@@ -186,7 +186,7 @@ require_once "config/config.php";
                                 <div class="card-body">
 
                                     <h3 class="fw-bold mb-2">
-                                        5 Ancipados de <span class="color-dinero-premio"> $500.000</span>
+                                        5 Anticipados de <span class="color-dinero-premio"> $500.000</span>
                                     </h3>
 
                                     <small class="fw-bold text-muted">
@@ -203,7 +203,7 @@ require_once "config/config.php";
                                 <div class="card-body">
 
                                     <h3 class="fw-bold text-dark mb-4">
-                                        5 Bendecidos de <span class="color-dinero-premio">$500.000</span>
+                                        5 Sticker Bendecidos de <span class="color-dinero-premio">$500.000</span>
                                     </h3>
                                     <div class="bendecidos-numeros">00405</div>
                                     <div class="bendecidos-numeros">89035</div>
@@ -235,8 +235,7 @@ require_once "config/config.php";
                             </div>
 
                             <div class="progress my-2">
-                                <div id="barraProgreso"
-                                    class="progress-bar progress-bar-striped progress-bar-animated"
+                                <div id="barraProgreso" class="progress-bar progress-bar-striped progress-bar-animated"
                                     style="width: 0%">
                                 </div>
                             </div>
@@ -268,6 +267,119 @@ require_once "config/config.php";
             </div>
         </div>
     </section>
+
+    <section class="section-premios py-4 border-top">
+
+        <div class="container-premio-loteria">
+            <div>
+                <div class="title-sticker-premiados">
+                    <h2 class="text-center fw-bold mb-3 mt-3">
+                        5 Sticker bendecidos en premios 🎁
+                    </h2>
+                </div>
+
+                <div class=" container container-premios-dos">
+
+                    <div id="slider-premios" class="splide slider-premios">
+                        <div class="splide__track">
+                            <ul class="splide__list">
+
+                                <li class="splide__slide tv-premio">
+                                    <img src="assets/images/profile/tv-premio.png">
+                                </li>
+
+                                <li class="splide__slide">
+                                    <img src="assets/images/profile/play-five.png">
+                                </li>
+
+                                <li class="splide__slide">
+                                    <img src="assets/images/profile/cel-moto-g.png">
+                                </li>
+
+                                <li class="splide__slide">
+                                    <img src="assets/images/profile/bicicleta-azul.png">
+                                </li>
+
+                                <li class="splide__slide">
+                                    <img src="assets/images/profile/bicicleta-negra.png">
+                                </li>
+
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="container-premiados-number">
+
+                    <div class="container-section-dos mb-5">
+                        <div class="title-descrption">
+                            <p class="title-info">
+                                📅 Del 13 al 29 de Enero llegan los anticipados de <strong>$500.000</strong>
+                            </p>
+                        </div>
+
+                        <div class="schedule">
+
+                            <div class="row-days">
+                                <div class="day">CUNDINAMARCA </div>
+                                <div class="lottery">
+                                    LUNES
+                                </div>
+                            </div>
+
+                            <div class="row-days">
+                                <div class="day">HUILA</div>
+                                <div class="lottery">
+                                    MARTES
+                                </div>
+                            </div>
+
+                            <div class="row-days">
+                                <div class="day">VALLE </div>
+                                <div class="lottery">
+                                    ANTCOLES
+                                </div>
+                            </div>
+
+
+                            <div class="row-days">
+                                <div class="day">BOGOTÁ</div>
+                                <div class="lottery">
+                                    JUEVES
+                                </div>
+                            </div>
+
+
+                            <div class="row-days">
+                                <div class="day">MEDELLÍN</div>
+                                <div class="lottery">
+                                    VIERNES
+                                </div>
+                            </div>
+
+                            <div class="row-days">
+                                <div class="day">BOYACA</div>
+                                <div class="lottery">
+                                    SABADO
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
 
     <!-- COMPRA -->
     <section id="compra" class="py-2 bg-white border-top">
@@ -469,7 +581,8 @@ require_once "config/config.php";
         </div>
     </section>
 
-    <section class="texto-ganadores d-none">
+
+    <section class="texto-ganadores">
         <div>
             <div id="prizesCarousel" class="carousel slide" data-bs-ride="carousel">
                 <h2 class="title-ganadores text-center title-premios">¡Últimos ganadores! 🥳</h2>
@@ -477,26 +590,63 @@ require_once "config/config.php";
         </div>
     </section>
 
-    <section class="container-ganadores d-none">
+    <section class="container-ganadores position-relative overflow-hidden">
+
+        <!-- CANVAS CONFETI -->
+        <canvas id="confetti-canvas"></canvas>
         <div id="exampleCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item">
-                    <img src="" class="d-block w-100" alt="Ganador 1">
+                    <p class="ganador-one">¡Ganador combo navideño premio #1! 🏍¦</p> <img
+                        src="assets/images/profile/ganador-combo-navideno-V3.png" alt="Imagen principal 1">
                 </div>
                 <div class="carousel-item">
-                    <img src="" class="d-block w-100" alt="Ganador 1">
+                    <p class="ganador-one">¡Ganador combo navideño premio #2! 🏍¦</p> <img
+                        src="assets/images/profile/dinamica-twoo-combo.png" alt="Imagen principal 1">
+                </div>
+                <div class="carousel-item">
+                    <p class="ganador-one">¡Ganadora dinámica de Noviembre MT-15 🏍️</p>
+                    <img src="assets/images/profile/mt-15-nov2.png" alt="Imagen principal 1">
+                </div>
+                <div class="carousel-item">
+                    <p class="ganador-one">¡Ganadora dinámica de Noviembre MT-15 🏍️</p>
+                    <img src="assets/images/profile/ganadora_mt15.png" alt="Imagen principal 1">
+                </div>
+                <div class="carousel-item">
+                    <p class="ganador-one">¡Ganadora dinámica de Octubre Yamaha NMX V3 🏍️</p>
+                    <img src="assets/images/profile/nmx-oct3.png" alt="Imagen principal 1">
+                </div>
+
+                <div class="carousel-item">
+                    <p class="ganador-one">¡Ganador dínica de Agosto Mazda 🏎️</p>
+                    <img src="assets/images/profile/ganador-mazda.png" alt="Imagen principal 1">
+                </div>
+
+                <div class="carousel-item">
+                    <p class="ganador-one">¡Ganadora dínica de Mayo MT-15 🏍️</p>
+                    <img src="assets/images/profile/ganadora-mt-2025-mayo.jpg" alt="Imagen principal 1">
                 </div>
                 <div class="carousel-item active">
-                    <img src="" class="d-block w-100" alt="Ganador 1">
+                    <p class="ganador-one">¡Ganador dinámica de Octubre FZ 3.0 🏍️</p>
+                    <img src="assets/images/profile/ganadorfz.png" alt="Imagen principal 2">
+                </div>
+
+                <div class="carousel-item">
+                    <p class="ganador-one">¡Ganadora Crypton FI! 🏍️</p>
+                    <img src="assets/images/profile/ganador-tres.jpg" alt="Imagen principal 3">
                 </div>
                 <div class="carousel-item">
-                    <img src="" class="d-block w-100" alt="Ganador 1">
+                    <p class="ganador-one">¡Ganador dinámica de Julio Yamaha MT15! 🏍️</p>
+                    <img src="assets/images/profile/ganadormt.png" alt="Imagen principal 4">
                 </div>
                 <div class="carousel-item">
-                    <img src="" class="d-block w-100" alt="Ganador 1">
+                    <p class="ganador-one">¡Ganador dinámica de Agosto NMAX 2025 🏍️</p>
+                    <img src="assets/images/profile/ganadornmax.png" alt="Imagen principal 4">
                 </div>
+
                 <div class="carousel-item">
-                    <img src="" class="d-block w-100" alt="Ganador 1">
+                    <p class="ganador-one">¡Ganadora dinámica de Enero Pulsar NS200 🏍️</p>
+                    <img src="assets/images/profile/ganadora-pulsar-f1.jpg" alt="Imagen principal 1">
                 </div>
 
             </div>
@@ -527,21 +677,15 @@ require_once "config/config.php";
                     <!-- Redes (desktop) -->
                     <div class="d-none d-md-flex gap-2 mt-3">
 
-                        <a
-                        target="_blank"
-                        class="social-instagram btn btn-outline-light btn-sm rounded-circle d-none">
+                        <a target="_blank" class="social-instagram btn btn-outline-light btn-sm rounded-circle d-none">
                             <i class="ti ti-brand-instagram"></i>
                         </a>
 
-                        <a 
-                        target="_blank"
-                        class="social-whatsapp btn btn-outline-success btn-sm rounded-circle d-none">
+                        <a target="_blank" class="social-whatsapp btn btn-outline-success btn-sm rounded-circle d-none">
                             <i class="ti ti-brand-whatsapp"></i>
                         </a>
 
-                        <a
-                        target="_blank"
-                        class="social-facebook btn btn-outline-primary btn-sm rounded-circle d-none">
+                        <a target="_blank" class="social-facebook btn btn-outline-primary btn-sm rounded-circle d-none">
                             <i class="ti ti-brand-facebook"></i>
                         </a>
 
@@ -601,27 +745,21 @@ require_once "config/config.php";
             <hr class="border-secondary my-4">
 
             <!-- Redes en Mobile -->
-                <div class="d-flex d-md-none justify-content-center gap-3 mb-3">
+            <div class="d-flex d-md-none justify-content-center gap-3 mb-3">
 
-                    <a
-                    target="_blank"
-                    class="social-instagram btn btn-outline-light rounded-circle d-none">
-                        <i class="ti ti-brand-instagram"></i>
-                    </a>
+                <a target="_blank" class="social-instagram btn btn-outline-light rounded-circle d-none">
+                    <i class="ti ti-brand-instagram"></i>
+                </a>
 
-                    <a
-                    target="_blank"
-                    class="social-whatsapp btn btn-outline-success rounded-circle d-none">
-                        <i class="ti ti-brand-whatsapp"></i>
-                    </a>
+                <a target="_blank" class="social-whatsapp btn btn-outline-success rounded-circle d-none">
+                    <i class="ti ti-brand-whatsapp"></i>
+                </a>
 
-                    <a
-                    target="_blank"
-                    class="social-facebook btn btn-outline-primary rounded-circle d-none">
-                        <i class="ti ti-brand-facebook"></i>
-                    </a>
+                <a target="_blank" class="social-facebook btn btn-outline-primary rounded-circle d-none">
+                    <i class="ti ti-brand-facebook"></i>
+                </a>
 
-                </div>
+            </div>
 
 
             <!-- Copyright -->
@@ -695,6 +833,99 @@ require_once "config/config.php";
     <script src="assets/js/settings.js"></script>
     <script src="assets/js/frontend.js"></script>
     <script src="assets/js/buscarTickets.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+
+    <!-- estilos confeti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+    <script>
+        let confetiInterval = null;
+        let myConfetti = null;
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const canvas = document.getElementById('confetti-canvas');
+            const seccion = document.querySelector('.container-ganadores');
+
+            if (!canvas || !seccion) return;
+
+            // Crear instancia local (IMPORTANTE)
+            myConfetti = confetti.create(canvas, {
+                resize: true,
+                useWorker: true
+            });
+
+            const observer = new IntersectionObserver((entries) => {
+
+                entries.forEach(entry => {
+
+                    if (entry.isIntersecting) {
+                        iniciarConfeti();
+                    } else {
+                        detenerConfeti();
+                    }
+
+                });
+
+            }, { threshold: 0.3 });
+
+            observer.observe(seccion);
+        });
+
+
+        function iniciarConfeti() {
+
+            if (confetiInterval) return;
+
+            confetiInterval = setInterval(() => {
+
+                // Lluvia desde izquierda
+                myConfetti({
+                    particleCount: 10,
+                    angle: 60,
+                    spread: 80,
+                    startVelocity: 40,
+                    gravity: 0.8,
+                    origin: { x: 0, y: 0 },
+                    colors: ['#FFD700', '#00C853', '#FFFFFF']
+                });
+
+                // Lluvia desde derecha
+                myConfetti({
+                    particleCount: 10,
+                    angle: 120,
+                    spread: 80,
+                    startVelocity: 40,
+                    gravity: 0.8,
+                    origin: { x: 1, y: 0 },
+                    colors: ['#FFD700', '#00C853', '#FFFFFF']
+                });
+
+                // Lluvia central (tipo nieve/confeti)
+                myConfetti({
+                    particleCount: 15,
+                    spread: 100,
+                    startVelocity: 25,
+                    gravity: 1,
+                    ticks: 200,
+                    origin: { x: Math.random(), y: 0 },
+                    shapes: ['square', 'circle'],
+                    scalar: 1.2,
+                    colors: ['#FFD700', '#00C853', '#FFFFFF']
+                });
+
+            }, 180); // más rápido = más abundante
+        }
+
+
+        function detenerConfeti() {
+            clearInterval(confetiInterval);
+            confetiInterval = null;
+        }
+    </script>
+
 
 
 
@@ -707,6 +938,35 @@ require_once "config/config.php";
                 arrows: false,
                 pagination: false
             }).mount();
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            new Splide('#slider-premios', {
+                type: 'loop',
+                autoplay: true,
+                interval: 3000,
+                pauseOnHover: false,
+                arrows: true,
+                pagination: true,
+            }).mount();
+
+        });
+    </script>
+
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            lazy: true,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
         });
     </script>
 

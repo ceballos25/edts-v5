@@ -491,7 +491,7 @@
     }
 
     .carousel-item img {
-        height: 520px !important;
+        height: 420px !important;
         object-fit: cover;
         max-width: 431px;
         border-radius: 20px;
@@ -521,7 +521,7 @@
     h2.title-ganadores.text-center.title-premios {
         text-align: center !important;
         font-weight: 700;
-        padding: 30px 0px 30px;
+        padding: 30px 0px 0px;
         ;
     }
 
@@ -547,77 +547,51 @@
         text-align: center;
     }
 
-/* CONTENEDOR */
-.progress {
-    height: 18px;
-    border-radius: 20px;
-    background-color: #0f172a; /* fondo oscuro elegante */
-    border: 1px solid rgba(0, 255, 0, 0.3);
-    overflow: hidden;
-}
+    /* CONTENEDOR */
+    .progress {
+        height: 18px;
+        border-radius: 20px;
+        background-color: #0f172a;
+        /* fondo oscuro elegante */
+        border: 1px solid rgba(0, 255, 0, 0.3);
+        overflow: hidden;
+    }
 
-/* BARRA */
-.progress-bar {
-    background: linear-gradient(
-        90deg,
-        #00ff88,
-        #00ff00,
-        #00cc66
-    ) !important;
+    /* BARRA */
+    .progress-bar {
+        background: linear-gradient(90deg,
+                #00ff88,
+                #00ff00,
+                #00cc66) !important;
 
-    font-weight: bold;
-    font-size: 12px;
+        font-weight: bold;
+        font-size: 12px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-    color: #003300;
+        color: #003300;
 
-    /* Glow 🔥 */
-    box-shadow: 
-        0 0 8px rgba(0, 255, 0, 0.7),
-        0 0 16px rgba(0, 255, 0, 0.4);
+        /* Glow 🔥 */
+        box-shadow:
+            0 0 8px rgba(0, 255, 0, 0.7),
+            0 0 16px rgba(0, 255, 0, 0.4);
 
-    /* Animación suave */
-    transition: width 0.8s ease-in-out;
+        /* Animación suave */
+        transition: width 0.8s ease-in-out;
 
-    border-radius: 20px;
-}
-
-
-@keyframes shine {
-    0% { left: -40%; }
-    100% { left: 120%; }
-}
+        border-radius: 20px;
+    }
 
 
-
-
-    @media (max-width: 768px) {
-        img.premios-primer-sorteo {
-            height: auto;
-            width: 333px;
-            border-radius: 20px;
-            object-fit: cover;
+    @keyframes shine {
+        0% {
+            left: -40%;
         }
 
-        li#main-carousel-slide01.premio-dos-combo img {
-            width: 390px !important;
-            height: 451px;
-        }
-
-        .carousel-item img {
-            height: 400px !important;
-        }
-
-        .container-ganadores {
-            margin: 0px 30px;
-        }
-
-        li.caballos {
-            display: flex;
-            justify-content: center;
+        100% {
+            left: 120%;
         }
     }
 
@@ -803,13 +777,171 @@
     .cantidad-manual:focus {
 
         outline: none;
-
         border-color: #ffbc42;
-
         box-shadow: 0 0 0 3px rgba(212, 175, 55, .2);
 
     }
 
     .paquete-card:hover {
         border: 2px solid #ffbc42 !important
+    }
+
+    .slider-premios {
+        max-width: 500px;
+        margin: auto;
+    }
+
+    .slider-premios .splide__slide {
+        display: flex;
+        justify-content: center;
+        background-color: #ffffff;
+    }
+
+    .slider-premios img {
+        width: 100%;
+        height: auto;
+        object-fit: inherit;
+        /* border-radius: 25px; */
+    }
+
+    #slider-premios {
+        border-radius: 20px;
+        overflow: hidden;
+        /* 🔥 CLAVE */
+        background: #f4f4f4;
+    }
+
+    .container-premios-dos,
+    .container-md,
+    .container-sm {
+        width: 350px;
+    }
+
+    .tv-premio img {
+        height: 220px;
+    }
+
+    #confetti-canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+
+        pointer-events: none;
+        z-index: 10;
+    }
+
+    .container-premio-loteria {
+        display: flex;
+        justify-content: center;
+        gap: 150px;
+    }
+
+    /*  */
+
+
+
+    .row-days {
+        display: grid;
+        grid-template-columns: 170px 1fr;
+        gap: 0;
+        align-items: stretch;
+        border-radius: 14px;
+        overflow: hidden;
+        background: #0f2235;
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .06);
+    }
+
+    .day {
+        background: #ffbc42;
+        color: #111;
+        font-weight: 900;
+        display: flex;
+        padding: 14px 12px;
+    }
+
+    .schedule {
+        display: grid;
+        gap: 14px;
+    }
+
+    .title-descrption p {
+        color: #000000;
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .title-descrption {
+        font-weight: 600;
+    }
+
+    .container-section-dos {
+        width: 100%;
+        max-width: 450px;
+        text-align: center;
+    }
+
+    .title-info {
+        font-weight: 700;
+        font-size: 16px;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .title-sticker-premiados h2 {
+        width: 370px;
+        font-size: 24px;
+    }
+
+    @media (max-width: 768px) {
+        img.premios-primer-sorteo {
+            height: auto;
+            width: 333px;
+            border-radius: 20px;
+            object-fit: cover;
+        }
+
+        li#main-carousel-slide01.premio-dos-combo img {
+            width: 390px !important;
+            height: 451px;
+        }
+
+        .carousel-item img {
+            height: 240px !important;
+        }
+
+        .container-ganadores {
+            margin: 0px 30px;
+        }
+
+        li.caballos {
+            display: flex;
+            justify-content: center;
+        }
+
+        .container-premio-loteria {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-direction: column;
+        }
+
+        .container-premiados-number {
+            margin: 20px;
+        }
+    }
+
+
+
+    .lottery {
+        padding: 14px 18px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        color: #fff;
+        font-weight: 700;
+        width: max-content;
+        text-align: left;
     }

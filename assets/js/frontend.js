@@ -782,3 +782,4 @@ function obtenerOrigenURL() {
 
     return params.get('cp') || null;
 }
+
