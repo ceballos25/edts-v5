@@ -45,7 +45,7 @@ if ($detail) {
                         <div class="card mb-0">
                             <div class="card-body">
                                 <a href="/" class="text-nowrap logo-img text-center d-block py-3 w-100">
-                                    <img src="./assets/images/logos/logo.jpg" width="200" alt="">
+                                    <img src="./assets/images/logos/logo-blanco.jpg" width="200" alt="">
                                 </a>
                                 <?php if ($msg): ?>
                                     <div class="alert alert-danger" role="alert">
@@ -67,6 +67,8 @@ if ($detail) {
                                         Ingresar
                                     </button>
                                 </form>
+
+                                <span class="d-flex justify-content-center"><small>Version 5.0.1</small></span>
                             </div>
                         </div>
                     </div>

@@ -19,7 +19,7 @@ function isOpen($files, $currentPage) {
   <div>
     <div class="brand-logo d-flex align-items-center justify-content-between">
       <a href="index.php" class="text-nowrap logo-img" style="display:flex; justify-content:center; width:100%;">
-        <img  style="width:45%; margin-top:10px;" class="d-flex" src="<?= ASSETS_URL ?>/images/logos/logo.jpg" alt="<?php echo SITE_NAME; ?>" />
+        <img  style="width:80%; margin-top:10px;" class="d-flex" src="<?= ASSETS_URL ?>/images/logos/logo-blanco.jpg" alt="<?php echo SITE_NAME; ?>" />
       </a>
       <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
         <i class="ti ti-x fs-6"></i>

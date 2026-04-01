@@ -159,12 +159,12 @@ $('#cantidadManual').on('blur', function () {
 
     if (!cant) return;
 
-    if (cant < 3) {
+    if (cant < 20) {
 
-        toastError("Recuerda mínimo 3 para participar");
+        toastError("Recuerda mínimo 20 para participar");
 
-        this.value = 3;
-        cant = 3;
+        this.value = 20;
+        cant = 20;
     }
 
     estado.cantidadSeleccionada = cant;
@@ -777,9 +777,104 @@ async function cargarPorcentajeBackend() {
 function obtenerOrigenURL() {
     const params = new URLSearchParams(window.location.search);
 
-    console.log('📦 URL params:', window.location.search);
-    console.log('📦 CP:', params.get('cp'));
-
     return params.get('cp') || null;
 }
+
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    // 🔧 CONFIG BASE reutilizable
+    function crearSlider(mainId, thumbsId, interval = 3000) {
+
+        const thumbs = new Splide(thumbsId, {
+            fixedWidth  : 100,
+            fixedHeight : 60,
+            gap         : 10,
+            rewind      : true,
+            pagination  : false,
+            isNavigation: true,
+            arrows      : true,   // ✅ flechas SOLO aquí
+            focus       : 'center',
+        });
+
+        const main = new Splide(mainId, {
+            type       : 'slide',
+            autoplay   : true,
+            interval   : interval,
+            rewind     : true,
+            pagination : false,
+            arrows     : false, // ❌ sin flechas arriba
+            speed      : 800,
+        });
+
+        main.sync(thumbs);
+
+        main.mount();
+        thumbs.mount();
+    }
+
+    // ── HERO ─────────────────────────────
+    crearSlider('#main-carousel', '#thumbnail-carousel', 3000);
+
+    // ── PREMIOS ──────────────────────────
+    crearSlider('#slider-premios', '#slider-thumbnails', 2500);
+
+    // ── GANADORES ────────────────────────
+    crearSlider('#ganadores-carousel', '#ganadores-thumbnails', 3500);
+
+
+
+    // ── CONFETI ─────────────────────────
+    let confetiInterval = null;
+    let myConfetti      = null;
+
+    const canvas  = document.getElementById('confetti-canvas');
+    const seccion = document.querySelector('.container-ganadores');
+
+    if (canvas && seccion) {
+
+        myConfetti = confetti.create(canvas, {
+            resize: true,
+            useWorker: true
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                entry.isIntersecting ? iniciarConfeti() : detenerConfeti();
+            });
+        }, { threshold: 0.3 });
+
+        observer.observe(seccion);
+    }
+
+    function iniciarConfeti() {
+        if (confetiInterval) return;
+
+        confetiInterval = setInterval(() => {
+
+            myConfetti({
+                particleCount: 10,
+                angle: 60,
+                spread: 80,
+                origin: { x: 0, y: 0 },
+                colors: ['#FFD700', '#00C853', '#FFFFFF']
+            });
+
+            myConfetti({
+                particleCount: 10,
+                angle: 120,
+                spread: 80,
+                origin: { x: 1, y: 0 },
+                colors: ['#FFD700', '#00C853', '#FFFFFF']
+            });
+
+        }, 180);
+    }
+
+    function detenerConfeti() {
+        clearInterval(confetiInterval);
+        confetiInterval = null;
+    }
+
+});
 

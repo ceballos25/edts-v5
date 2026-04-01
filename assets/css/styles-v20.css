@@ -785,32 +785,50 @@
     .paquete-card:hover {
         border: 2px solid #ffbc42 !important
     }
+        /* Miniaturas hero: centradas */
+        #thumbnail-carousel .splide__track {
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
+        #thumbnail-carousel .splide__list {
+            justify-content: center;
+        }
 
-    .slider-premios {
-        max-width: 500px;
-        margin: auto;
-    }
 
-    .slider-premios .splide__slide {
-        display: flex;
-        justify-content: center;
-        background-color: #ffffff;
-    }
-
-    .slider-premios img {
+    /* Ganadores - thumbnails debajo */
+    #ganadores-thumbnails {
+        display: block;
         width: 100%;
+    }
+    #ganadores-thumbnails .splide__slide {
+        width: 72px !important;
+        height: 56px !important;
+    }
+    #ganadores-thumbnails .splide__slide img {
+        width: 72px;
+        height: 56px;
+        object-fit: cover;
+        border-radius: 6px;
+        border: 2px solid transparent;
+        transition: border-color .2s;
+        cursor: pointer;
+    }
+
+    #ganadores-carousel .splide__slide img {
+        max-width: 100%;
+        border-radius: 12px;
+    }
+
+    #ganadores-carousel .splide__slide img {
+        max-width: 100%;
+        max-height: 300px;
+        width: auto;
         height: auto;
-        object-fit: inherit;
-        /* border-radius: 25px; */
+        object-fit: contain;
+        border-radius: 12px;
+        display: block;
+        margin: 0 auto;
     }
-
-    #slider-premios {
-        border-radius: 20px;
-        overflow: hidden;
-        /* 🔥 CLAVE */
-        background: #f4f4f4;
-    }
-
     .container-premios-dos,
     .container-md,
     .container-sm {
@@ -890,7 +908,8 @@
     }
 
     .title-sticker-premiados h2 {
-        width: 370px;
+        width: 100%;
+        max-width: 370px;
         font-size: 24px;
     }
 

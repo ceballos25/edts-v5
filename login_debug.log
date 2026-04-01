@@ -67,3 +67,43 @@ Response: {
     ]
 }
 
+=== LOGIN DEBUG 2026-03-31 23:47:08 ===
+URL: http://api.eldiadetusuerte.test/admins?login=true&suffix=admin
+HTTP Code: 200
+Curl Error: 
+Response: {
+    "status": 200,
+    "results": [
+        {
+            "id_admin": 2,
+            "email_admin": "admin",
+            "rol_admin": null,
+            "token_admin": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzUwMTg4MjgsImV4cCI6MTc3NTEwNTIyOCwiZGF0YSI6eyJpZCI6MiwiZW1haWwiOiJhZG1pbiJ9fQ.0PL_kj2P8PqZQXAlED4RXNjGklX366g5e5sOjVslEn4",
+            "token_exp_admin": 1775105228,
+            "status_admin": 1,
+            "date_created_admin": "2026-03-03",
+            "date_updated_admin": "2026-03-31 16:25:28"
+        }
+    ]
+}
+
+=== LOGIN DEBUG 2026-04-01 00:36:07 ===
+URL: http://api.eldiadetusuerte.test/admins?login=true&suffix=admin
+HTTP Code: 200
+Curl Error: 
+Response: {
+    "status": 200,
+    "results": [
+        {
+            "id_admin": 2,
+            "email_admin": "admin",
+            "rol_admin": null,
+            "token_admin": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzUwMjE3NjcsImV4cCI6MTc3NTEwODE2NywiZGF0YSI6eyJpZCI6MiwiZW1haWwiOiJhZG1pbiJ9fQ.WUkog-UIjQg-C7p43h-mpDI8zRIPf7Ebg0LKqkaVbUQ",
+            "token_exp_admin": 1775108167,
+            "status_admin": 1,
+            "date_created_admin": "2026-03-03",
+            "date_updated_admin": "2026-03-31 23:47:08"
+        }
+    ]
+}
+
