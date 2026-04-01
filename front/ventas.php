@@ -44,17 +44,19 @@ include_once ROOT_PATH . "/includes/head.php";
                                 <label class="form-label small fw-bold">Método de Pago</label>
                                     <select id="filterMetodoPago" class="form-select form-select-sm">
                                     <option value="">Todos los pagos</option>
-                                    <option value="Transferencia">Transferencia</option>
                                     <option value="Pagina Web">Pagina Web</option>
-                                    <option value="Efectivo">Efectivo</option>
+                                    <option value="Transferencia">Transferencia</option>
+                                    <option value="Venta Manual">Venta Manual</option>
                                     </select>
-                            </div>                            
-                            <div class="col-md-2 d-none">
-                                <label class="form-label small fw-bold">Rifa</label>
-                                <select id="filterRifa" class="form-select form-select-sm">
-                                    <option value="">Todas las rifas</option>
+                            </div>   
+                            
+                            <div class="col-md-3">
+                                <label class="form-label small fw-bold">Origen</label>
+                                <select id="filterOrigen" class="form-select form-select-sm">
+                                    <option value="">Cargando...</option>
                                 </select>
                             </div>
+
                             <div class="col-md-2">
                                 <label class="form-label small fw-bold">Vendedor</label>
                                 <select id="filterAdmin" class="form-select form-select-sm">

@@ -24,7 +24,8 @@ const ALLOWED_ACTIONS = [
     'obtener_por_celular' => ['VentasController', 'buscarTicketsPorCelular', ['phone_customer' => null]],    
     'numeros_vendidos'    => ['NumerosController', 'obtenerNumerosVendidos', []],
     'obtener_admins' => ['VentasController', 'obtenerAdmins', []],    
-    'anular' => ['VentasController', 'anularVenta', ['id_sale' => null]]
+    'anular' => ['VentasController', 'anularVenta', ['id_sale' => null]],
+    'obtener_origenes' => ['VentasController', 'obtenerOrigenesUnicos', []],
 ];
 
 try {

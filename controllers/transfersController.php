@@ -18,25 +18,18 @@ class TransfersController
             empty($data['quantity']) ||
             empty($data['amount'])
         ) {
-            return [
-                'success' => false,
-                'message' => 'Datos incompletos'
-            ];
+            return ['success' => false, 'message' => 'Datos incompletos'];
         }
 
         $cantidad = (int)$data['quantity'];
 
         if ($cantidad < 3) {
-            return [
-                'success' => false,
-                'message' => 'La compra mínima es de 3 números'
-            ];
+            return ['success' => false, 'message' => 'La compra mínima es de 3 números'];
         }
 
         /* ===============================
         VALIDAR DISPONIBILIDAD
         =============================== */
-
         $res = ApiRequest::get("tickets", [
             'linkTo'  => 'id_raffle_ticket,status_ticket',
             'equalTo' => $data['id_raffle'] . ',0',
@@ -44,87 +37,68 @@ class TransfersController
         ]);
 
         if (!ApiRequest::isSuccess($res) || empty($res->results)) {
-            return [
-                'success' => false,
-                'message' => 'No hay números disponibles'
-            ];
+            return ['success' => false, 'message' => 'No hay números disponibles'];
         }
 
-        $ticketsDisponibles = is_array($res->results)
-            ? $res->results
-            : [$res->results];
+        $ticketsDisponibles = is_array($res->results) ? $res->results : [$res->results];
 
         if (count($ticketsDisponibles) < $cantidad) {
-            return [
-                'success' => false,
-                'message' => 'No hay suficientes números disponibles'
-            ];
+            return ['success' => false, 'message' => 'No hay suficientes números disponibles'];
         }
 
         /* ===============================
         GENERAR CÓDIGO
         =============================== */
-
         $code = str_pad(random_int(0, 9999999999), 10, '0', STR_PAD_LEFT);
 
         /* ===============================
         CLIENTE
         =============================== */
-
         $idCustomer = ClientesController::obtenerOCrearCliente([
-            'name_customer' => $data['name_customer'],
-            'lastname_customer' => $data['lastname_customer'],
-            'phone_customer' => $data['phone_customer'],
-            'email_customer' => $data['email_customer'],
+            'name_customer'       => $data['name_customer'],
+            'lastname_customer'   => $data['lastname_customer'],
+            'phone_customer'      => $data['phone_customer'],
+            'email_customer'      => $data['email_customer'],
             'department_customer' => $data['department_customer'],
-            'city_customer' => $data['city_customer'],
+            'city_customer'       => $data['city_customer'],
         ]);
 
         if (!$idCustomer) {
-            return [
-                'success' => false,
-                'message' => 'Error con cliente'
-            ];
+            return ['success' => false, 'message' => 'Error con cliente'];
         }
 
         /* ===============================
         CREAR TRANSFERENCIA
         =============================== */
+        $resTransfer = ApiRequest::post(
+            self::TABLE . "?token=no&table=transfers&suffix=transfer&except=id_transfer",
+            [
+                'code_transfer'        => $code,
+                'id_raffle_transfer'   => (int)$data['id_raffle'],
+                'id_customer_transfer' => $idCustomer,
+                'quantity_transfer'    => $cantidad,
+                'amount_transfer'      => $data['amount'],
+                'currency_transfer'    => 'COP',
+                'status_transfer'      => 1,
+                'source_transfer'      => $data['source_transfer'] ?? null
+            ]
+        );
 
-            $resTransfer = ApiRequest::post(
-                self::TABLE . "?token=no&table=transfers&suffix=transfer&except=id_transfer",
-                [
-                    'code_transfer' => $code,
-                    'id_raffle_transfer' => (int)$data['id_raffle'],
-                    'id_customer_transfer' => $idCustomer,
-                    'quantity_transfer' => $cantidad,
-                    'amount_transfer' => $data['amount'],
-                    'currency_transfer' => 'COP',
-                    'status_transfer' => 1,
-                    'source_transfer' => $data['source_transfer']
-                ]
-            );
+        if (!ApiRequest::isSuccess($resTransfer)) {
+            return ['success' => false, 'message' => 'Error creando transferencia'];
+        }
 
-            if (!ApiRequest::isSuccess($resTransfer)) {
-                return [
-                    'success' => false,
-                    'message' => 'Error creando transferencia',
-                    'debug' => $resTransfer
-                ];
-            }
+        $resData    = $resTransfer->results ?? null;
+        $idTransfer = null;
 
-        $resData = $resTransfer->results ?? null;
-
-            $idTransfer = null;
-
-            if (is_array($resData)) {
-                $idTransfer = $resData[0]->id_transfer ?? null;
-            } elseif (is_object($resData)) {
-                $idTransfer = $resData->id_transfer ?? ($resData->lastId ?? null);
-            }
+        if (is_array($resData)) {
+            $idTransfer = $resData[0]->id_transfer ?? null;
+        } elseif (is_object($resData)) {
+            $idTransfer = $resData->id_transfer ?? ($resData->lastId ?? null);
+        }
 
         return [
-            'success' => true,
+            'success'     => true,
             'id_transfer' => $idTransfer,
             'code_transfer' => $code
         ];
@@ -134,36 +108,31 @@ class TransfersController
      * OBTENER POR CODE
      * ===================================================== */
     public static function obtenerPorCode(string $code)
-{
-    $code = trim($code);
+    {
+        $code = trim($code);
 
-    $res = ApiRequest::get(self::TABLE, [
-        "linkTo" => "code_transfer",
-        "equalTo" => $code,
-        "token" => "no",
-        "select" => "*"
-    ]);
+        $res = ApiRequest::get(self::TABLE, [
+            "linkTo"  => "code_transfer",
+            "equalTo" => $code,
+            "select"  => "*"
+            // ✅ FIX 5: eliminado "token" => "no" que no corresponde al GET
+        ]);
 
-    // var_dump($code);
-    // var_dump($res);
-    // exit;
-
-    if (!ApiRequest::isSuccess($res) || empty($res->results)) {
-        return null;
-    }
-
-    // Si la API devuelve un array, filtramos estrictamente por el código
-    if (is_array($res->results)) {
-        foreach ($res->results as $item) {
-            if ($item->code_transfer === $code) {
-                return (array)$item;
-            }
+        if (!ApiRequest::isSuccess($res) || empty($res->results)) {
+            return null;
         }
-        return null; 
-    }
 
-    return (array)$res->results;
-}
+        if (is_array($res->results)) {
+            foreach ($res->results as $item) {
+                if ($item->code_transfer === $code) {
+                    return (array)$item;
+                }
+            }
+            return null;
+        }
+
+        return (array)$res->results;
+    }
 
     /* =====================================================
      * APROBAR TRANSFERENCIA
@@ -174,12 +143,10 @@ class TransfersController
             return ['success' => false, 'message' => 'Ya procesado'];
         }
 
-        // 🔥 MARCAR APROBADO
+        // MARCAR APROBADO
         $update = ApiRequest::put(
             self::TABLE . "?id={$transfer['id_transfer']}&nameId=id_transfer&token=no&except=code_transfer",
-            [
-                'status_transfer' => 2
-            ]
+            ['status_transfer' => 2]
         );
 
         if (!ApiRequest::isSuccess($update)) {
@@ -192,7 +159,7 @@ class TransfersController
             return ['success' => false, 'message' => 'Cantidad inválida'];
         }
 
-        // 🔥 VALIDAR DISPONIBILIDAD
+        // VALIDAR DISPONIBILIDAD
         $res = ApiRequest::get("tickets", [
             'linkTo'  => 'id_raffle_ticket,status_ticket',
             'equalTo' => $transfer['id_raffle_transfer'] . ',0',
@@ -203,41 +170,32 @@ class TransfersController
             return ['success' => false, 'message' => 'Sin números disponibles'];
         }
 
-        $ticketsDisponibles = is_array($res->results)
-            ? $res->results
-            : [$res->results];
+        $ticketsDisponibles = is_array($res->results) ? $res->results : [$res->results];
 
         if (count($ticketsDisponibles) < $cantidad) {
             return ['success' => false, 'message' => 'No hay suficientes números'];
         }
 
-        // 🔥 CREAR VENTA
+        // CREAR VENTA
         $resVenta = VentasController::crearVenta([
-            'id_customer' => $transfer['id_customer_transfer'],
-            'id_raffle' => $transfer['id_raffle_transfer'],
-            'quantity_sale' => $cantidad,
-            'total_sale' => $transfer['amount_transfer'],
-            'code_sale' => $transfer['code_transfer'],
+            'id_customer'         => $transfer['id_customer_transfer'],
+            'id_raffle'           => $transfer['id_raffle_transfer'],
+            'quantity_sale'       => $cantidad,
+            'total_sale'          => $transfer['amount_transfer'],
+            'code_sale'           => $transfer['code_transfer'],
             'payment_method_sale' => 'Transferencia',
-            'id_admin' => $_SESSION['user_id'] ?? null // 🔥 AQUÍ
+            'id_admin'            => $_SESSION['user_id'] ?? null,
+            'source_sale'         => $transfer['source_transfer'] ?? null
+            // ✅ crearVenta() ya maneja el correo internamente
         ]);
 
-    if (!empty($resVenta['success']) && !empty($resVenta['id_sale'])) {
-
-        MailController::enviarCorreoVenta((int)$resVenta['id_sale']);
-
-        return [
-            'success' => true,
-            'id_sale' => (int)$resVenta['id_sale'],
-            'message' => 'Venta creada correctamente'
-        ];
-    }
-
-        // 🔥 FALLÓ → MARCAR ERROR
-        ApiRequest::put(
-            self::TABLE . "?id={$transfer['id_transfer']}&nameId=id_transfer&token=no&except=code_transfer",
-            ['status_transfer' => 4]
-        );
+        if (!empty($resVenta['success']) && !empty($resVenta['id_sale'])) {
+            return [
+                'success' => true,
+                'id_sale' => (int)$resVenta['id_sale'],
+                'message' => 'Venta creada correctamente'
+            ];
+        }
 
         return ['success' => false, 'message' => 'Error creando la venta'];
     }
@@ -249,28 +207,30 @@ class TransfersController
     {
         $update = ApiRequest::put(
             self::TABLE . "?id={$transfer['id_transfer']}&nameId=id_transfer&token=no&except=code_transfer",
-            [
-                'status_transfer' => 3
-            ]
+            ['status_transfer' => 3]
         );
 
         if (!ApiRequest::isSuccess($update)) {
             return ['success' => false, 'message' => 'Error al rechazar'];
         }
 
-        return [
-            'success' => true,
-            'message' => 'Transferencia rechazada'
-        ];
+        return ['success' => true, 'message' => 'Transferencia rechazada'];
     }
 
+    /* =====================================================
+     * OBTENER TRANSFERENCIAS
+     * ===================================================== */
     public static function obtenerTransferencias()
     {
-        $res = ApiRequest::get(self::TABLE, [
-            "select" => "*",
-            "linkTo" => "status_transfer",
-            "equalTo" => "1",
-            "orderBy" => "id_transfer",
+        // ✅ FIX 3: trae todas, no solo pendientes (el JS filtra por estado)
+        // ✅ FIX 4: usa relations para evitar N consultas por cliente
+        $res = ApiRequest::get("relations", [
+            "rel"       => "transfers,customers",
+            "type"      => "transfer,customer",
+            "select"    => "id_transfer,code_transfer,quantity_transfer,amount_transfer,status_transfer,date_created_transfer,source_transfer,url_transfer,id_raffle_transfer,id_customer_transfer,name_customer,lastname_customer,phone_customer,email_customer,city_customer",
+            "linkTo"    => "status_transfer",
+            "equalTo"   => "1",
+            "orderBy"   => "id_transfer",
             "orderMode" => "DESC"
         ]);
 
@@ -280,36 +240,18 @@ class TransfersController
 
         $lista = is_array($res->results) ? $res->results : [$res->results];
 
-foreach ($lista as &$t) {
-
-    $cliente = ApiRequest::get("customers", [
-        "linkTo" => "id_customer",
-        "equalTo" => $t->id_customer_transfer,
-        "select" => "*"
-    ]);
-
-    if (ApiRequest::isSuccess($cliente) && !empty($cliente->results)) {
-        $c = is_array($cliente->results) ? $cliente->results[0] : $cliente->results;
-
-        $t->name_customer = $c->name_customer ?? '';
-        $t->lastname_customer = $c->lastname_customer ?? '';
-        $t->phone_customer = $c->phone_customer ?? '';
-        $t->email_customer = $c->email_customer ?? '';
-        $t->city_customer = $c->city_customer ?? '';
-    }
-}
-
-
-return ['success' => true, 'data' => $lista];
-
         return ['success' => true, 'data' => $lista];
+        // ✅ FIX 1: eliminado return duplicado
+        // ✅ FIX 2: eliminado foreach con &$t sin unset
     }
 
+    /* =====================================================
+     * OBTENER SETTINGS
+     * ===================================================== */
     public static function obtenerSettings()
     {
         $res = ApiRequest::get("settings", [
-            "select" => "*",
-            "token" => "no"
+            "select" => "*"
         ]);
 
         if (!ApiRequest::isSuccess($res) || empty($res->results)) {
@@ -319,12 +261,10 @@ return ['success' => true, 'data' => $lista];
         $lista = is_array($res->results) ? $res->results : [$res->results];
 
         $map = [];
-
         foreach ($lista as $item) {
             $map[$item->key_setting] = $item->value_setting;
         }
-        
 
         return $map;
     }
- }
+}

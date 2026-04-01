@@ -196,12 +196,8 @@ include_once ROOT_PATH . "/includes/head.php";
                                     
                                     <div class="row g-2 mb-3">
                                         <div class="col-6">
-                                            <input type="radio" class="btn-check" name="metodoPago" id="pagoEfecDesk" value="Efectivo">
-                                            <label class="btn btn-outline-primary w-100 fw-bold py-2" for="pagoEfecDesk">💵 Efectivo</label>
-                                        </div>
-                                        <div class="col-6">
-                                            <input type="radio" class="btn-check" name="metodoPago" id="pagoTransDesk" value="Transferencia">
-                                            <label class="btn btn-outline-primary w-100 fw-bold py-2" for="pagoTransDesk">🏦 Transf.</label>
+                                            <input type="radio" class="btn-check d-none" checked name="metodoPago" cheked id="pagoEfecDesk" value="Venta Manual">
+                                            <label class="btn btn-outline-primary w-100 fw-bold py-2 d-none" for="pagoEfecDesk"></label>
                                         </div>
                                     </div>
                                     <button class="btn btn-success w-100 py-2 fw-bold rounded-3 shadow" id="btnCompletarVenta" onclick="procesarVenta()">CONFIRMAR VENTA</button>
@@ -229,11 +225,9 @@ include_once ROOT_PATH . "/includes/head.php";
         </div>
         
         <div class="btn-group" role="group">
-            <input type="radio" class="btn-check" name="metodoPagoMobile" id="pagoEfecMob" value="Efectivo">
-            <label class="btn btn-outline-primary btn-sm px-3" for="pagoEfecMob">💵</label>
+            <input type="radio" class="btn-check de-none" checked name="metodoPagoMobile" id="pagoEfecMob" value="Venta Manual">
+            <label class="btn btn-outline-primary btn-sm px-3 d-none" for="pagoEfecMob"></label>
             
-            <input type="radio" class="btn-check" name="metodoPagoMobile" id="pagoTransMob" value="Transferencia">
-            <label class="btn btn-outline-primary btn-sm px-3" for="pagoTransMob">🏦</label>
         </div>
     </div>
     

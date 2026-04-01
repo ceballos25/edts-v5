@@ -1,198 +1,94 @@
 /**
  * ventas.js - Gestión Blindada y Completa
  */
-let ventasCache = [], paginaActual = 1;
+
+// 1. DECLARACIÓN DE VARIABLES GLOBALES (VITAL)
+let paginaActual = 1;
 const registrosPorPagina = 10;
 
 document.addEventListener('DOMContentLoaded', function() {
-
-    // 1. Cargar Rifas
-    cargarRifasSelect();
     
-    // 2. Cargar Ventas Iniciales
+    // Cargas iniciales de selects
+    //cargarRifasSelect();
+    cargarAdminsSelect();
+    cargarOrigenesSelect();
+    
+    // Cargar Ventas Iniciales
     cargarVentas();
 
-    // 3. Cargar admins
-    cargarAdminsSelect();
+    // Eventos de filtros
+    const filtrosIds = ['filterMetodoPago', 'filterAdmin', 'filterRifa', 'filterOrigen', 'filterPeriodo'];
+    filtrosIds.forEach(id => {
+        document.getElementById(id)?.addEventListener('change', () => {
+            paginaActual = 1;
+            cargarVentas();
+        });
+    });
 
-    // Método de pago
-    document.getElementById('filterMetodoPago')?.addEventListener('change', () => {
+    // Buscador
+    document.getElementById('searchVentas')?.addEventListener('input', debounce(() => {
         paginaActual = 1;
         cargarVentas();
-    });
+    }, 600));
 
-    // Admin
-    const selAdmin = document.getElementById('filterAdmin');
-    if (selAdmin) {
-        selAdmin.addEventListener('change', () => {
-            paginaActual = 1;
-            cargarVentas();
-        });
-    }
-
-    // 🔎 Buscador
-    const inputSearch = document.getElementById('searchVentas');
-    if (inputSearch) {
-        inputSearch.addEventListener('input', debounce(() => {
-            paginaActual = 1;
-            cargarVentas();
-        }, 600));
-    }
-
-    // 📅 Periodo
-    const selPeriodo = document.getElementById('filterPeriodo');
-    if (selPeriodo) {
-        selPeriodo.addEventListener('change', function() {
-            if (this.value !== "") {
-                document.getElementById('fecha_inicio').value = '';
-                document.getElementById('fecha_fin').value = '';
-            }
-            paginaActual = 1;
-            cargarVentas();
-        });
-    }
-
-    // 📅 Fechas manuales
+    // Fechas manuales
     ['fecha_inicio', 'fecha_fin'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) {
-            el.addEventListener('change', function() {
-                if (this.value !== "") {
-                    document.getElementById('filterPeriodo').value = '';
-                }
-
-                if (
-                    document.getElementById('fecha_inicio').value &&
-                    document.getElementById('fecha_fin').value
-                ) {
-                    paginaActual = 1;
-                    cargarVentas();
-                }
-            });
-        }
-    });
-
-    // 🎯 Rifa
-    const selRifa = document.getElementById('filterRifa');
-    if (selRifa) {
-        selRifa.addEventListener('change', function() {
-            paginaActual = 1;
-            cargarVentas();
+        document.getElementById(id)?.addEventListener('change', function() {
+            if (this.value !== "") document.getElementById('filterPeriodo').value = '';
+            if (document.getElementById('fecha_inicio').value && document.getElementById('fecha_fin').value) {
+                paginaActual = 1;
+                cargarVentas();
+            }
         });
-    }
-
+    });
 });
 
-// ===============================
-// FUNCIONES
-// ===============================
-
-// Obtener Rifas
-async function cargarRifasSelect() {
-    try {
-        const fd = new FormData();
-        fd.append('action', 'obtener_rifas');
-
-        const res = await fetch('ajax/ventas.ajax.php', { method: 'POST', body: fd });
-        const data = await res.json();
-
-        if (data.success && data.data) {
-            const select = document.getElementById('filterRifa');
-            select.innerHTML = '<option value="">Todas las rifas</option>';
-
-            const lista = Array.isArray(data.data) ? data.data : [data.data];
-
-            lista.forEach(r => {
-                select.innerHTML += `<option value="${r.id_raffle}">${r.title_raffle}</option>`;
-            });
-        }
-    } catch (e) {
-        console.error("Error rifas", e);
-    }
-}
-
-// Obtener Admins
-async function cargarAdminsSelect() {
-    try {
-        const fd = new FormData();
-        fd.append('action', 'obtener_admins');
-
-        const res = await fetch('ajax/ventas.ajax.php', { method: 'POST', body: fd });
-        const data = await res.json();
-
-        if (data.success && data.data) {
-            const select = document.getElementById('filterAdmin');
-            select.innerHTML = '<option value="">Todos</option>';
-
-            data.data.forEach(a => {
-                select.innerHTML += `<option value="${a.id_admin}">${a.email_admin}</option>`;
-            });
-        }
-    } catch (e) {
-        console.error("Error cargando admins", e);
-    }
-}
-
-// Cargar Ventas
 async function cargarVentas() {
+    // Activar Preloader
     if (typeof showPreloader === 'function') showPreloader();
+
+    const tbody = document.getElementById('bodyTabla');
+    if (tbody) tbody.innerHTML = `<tr><td colspan="8" class="text-center py-5">Cargando datos...</td></tr>`;
 
     try {
         const fd = new FormData();
         fd.append('action', 'obtener');
+        fd.append('page', paginaActual);
+        fd.append('limit', registrosPorPagina);
+        
+        // Captura de filtros
         fd.append('search', document.getElementById('searchVentas')?.value || '');
-        fd.append('periodo', document.getElementById('filterPeriodo')?.value || '');
         fd.append('id_raffle', document.getElementById('filterRifa')?.value || '');
+        fd.append('id_admin', document.getElementById('filterAdmin')?.value || '');
+        fd.append('payment_method', document.getElementById('filterMetodoPago')?.value || '');
+        fd.append('periodo', document.getElementById('filterPeriodo')?.value || '');
         fd.append('fecha_inicio', document.getElementById('fecha_inicio')?.value || '');
         fd.append('fecha_fin', document.getElementById('fecha_fin')?.value || '');
-        fd.append('payment_method', document.getElementById('filterMetodoPago')?.value || '');
-        fd.append('id_admin', document.getElementById('filterAdmin')?.value || '');
+        fd.append('source_sale', document.getElementById('filterOrigen')?.value || '');
 
         const res = await fetch('ajax/ventas.ajax.php', { method: 'POST', body: fd });
         const data = await res.json();
 
-        ventasCache = data.success
-            ? (Array.isArray(data.data) ? data.data : (data.data ? [data.data] : []))
-            : [];
-
-        renderizarTodo();
-
+        if (data.success) {
+            const ventas = Array.isArray(data.data) ? data.data : (data.data ? [data.data] : []);
+            renderTabla(ventas);
+            actualizarPaginacion(data.total); 
+        } else {
+            renderTabla([]);
+        }
     } catch (e) {
-        console.error(e);
+        console.error("Error en cargarVentas:", e);
+        renderTabla([]);
     } finally {
         if (typeof hidePreloader === 'function') hidePreloader();
     }
-}
-
-// Render general
-function renderizarTodo() {
-    if (typeof PaginationHelper !== 'undefined') {
-        const segmento = PaginationHelper.getSegment(ventasCache, paginaActual, registrosPorPagina);
-        renderTabla(segmento);
-
-        PaginationHelper.render({
-            totalItems: ventasCache.length,
-            currentPage: paginaActual,
-            limit: registrosPorPagina,
-            containerId: 'contenedorPaginacion',
-            infoId: 'infoPaginacion',
-            callbackName: 'cambiarPagina'
-        });
-    } else {
-        renderTabla(ventasCache);
-    }
-}
-
-function cambiarPagina(p) {
-    paginaActual = p;
-    renderizarTodo();
 }
 
 function renderTabla(ventas) {
     const tbody = document.getElementById('bodyTabla');
     if (!tbody) return;
 
-    if (!ventas || ventas.length === 0) {
+    if (ventas.length === 0) {
         tbody.innerHTML = `<tr><td colspan="8" class="text-center py-5 text-muted">No se encontraron registros</td></tr>`;
         return;
     }
@@ -201,116 +97,122 @@ function renderTabla(ventas) {
         const f = new Date(v.date_created_sale);
         const fecha = f.toLocaleDateString('es-CO');
         const hora = f.toLocaleTimeString('es-CO', { hour: '2-digit', minute: '2-digit', hour12: true });
-
         const inicial = v.name_customer ? v.name_customer.charAt(0).toUpperCase() : 'C';
-
-        const badgeClass = v.payment_method_sale === 'Efectivo' 
+        const badgeClass = v.payment_method_sale === 'Venta Manual' 
             ? 'bg-success-subtle text-success border-success-subtle' 
             : 'bg-primary-subtle text-primary border-primary-subtle';
 
         return `
         <tr class="align-middle border-bottom hover-shadow">
-            <td class="d-none">${v.id_sale}</td>
-
-            <!-- CLIENTE -->
             <td class="py-3 ps-3">
                 <div class="d-flex">
                     <div class="rounded-circle bg-light border d-flex justify-content-center align-items-center text-secondary fw-bold me-3 flex-shrink-0" 
                          style="width: 42px; height: 42px; font-size: 1.1rem;">
                         ${inicial}
                     </div>
-
                     <div class="d-flex flex-column" style="line-height: 1.3;">
-                        <span class="fw-bold text-dark text-capitalize">
-                            ${v.name_customer} ${v.lastname_customer}
-                        </span>
-
+                        <span class="fw-bold text-dark text-capitalize">${v.name_customer} ${v.lastname_customer}</span>
                         <div class="text-muted small mt-1">
-                            <span class="me-2">
-                                <i class="ti ti-phone text-secondary"></i> ${v.phone_customer || '--'}
-                            </span>
-                            <span>
-                                <i class="ti ti-map-pin text-secondary"></i> ${v.city_customer || 'N/A'}
-                            </span>
+                            <span class="me-2"><i class="ti ti-phone"></i> ${v.phone_customer || '--'}</span>
                         </div>
-
                         <small class="text-muted fst-italic" style="font-size: 0.75rem;">
-                            <i class="ti ti-mail text-secondary"></i> ${v.email_customer || ''}
-                        </small>
-
-                        <small class="text-muted fst-italic" style="font-size: 0.75rem;">
-                            <i class="ti ti-user text-secondary"></i> 
-                            ${v.email_admin || ('Admin #' + (v.id_admin_sale ?? '0'))}
+                            <i class="ti ti-user"></i> ${v.email_admin || 'Sistema'}
+                            ${(v.source_sale && v.source_sale !== 'null' && v.source_sale.trim() !== '') 
+                                ? `&nbsp;·&nbsp;<i class="ti ti-world"></i> ${v.source_sale}` 
+                                : `&nbsp;·&nbsp;<i class="ti ti-world"></i> N/A`}
                         </small>
                     </div>
                 </div>
             </td>
-
-            <!-- CODIGO -->
-            <td class="py-3">
-                <span class="font-monospace bg-light text-primary px-2 py-1 rounded border" style="font-size: 0.85rem;">
-                    ${v.code_sale}
-                </span>
-            </td>
-
-            <!-- CANTIDAD -->
-            <td class="py-3">
-                <span class="fw-medium text-dark d-block">
-                    ${v.quantity_sale} Núms
-                </span>
-                <small class="text-muted text-truncate d-block">
-                    ${v.title_raffle}
-                </small>
-            </td>
-
-            <!-- TOTAL -->
-            <td class="py-3">
-                <span class="fw-bold text-dark">
-                    $${Number(v.total_sale).toLocaleString('es-CO')}
-                </span>
-            </td>
-
-            <!-- METODO -->
-            <td class="py-3">
-                <span class="badge ${badgeClass} border px-3 py-2 rounded-pill">
-                    ${v.payment_method_sale}
-                </span>
-            </td>
-
-            <!-- FECHA -->
-            <td class="py-3">
-                <div class="d-flex flex-column text-muted">
-                    <span class="text-dark fw-medium">${fecha}</span>
-                    <span style="font-size: 0.85rem;">${hora}</span>
-                </div>
-            </td>
-
-            <!-- ACCIONES -->
+            <td><span class="font-monospace bg-light text-primary px-2 py-1 rounded border" style="font-size: 0.85rem;">${v.code_sale}</span></td>
+            <td><span class="fw-medium text-dark d-block">${v.quantity_sale} Núms</span><small class="text-muted text-truncate d-block" style="max-width: 150px;">${v.title_raffle}</small></td>
+            <td><span class="fw-bold text-dark">$${Number(v.total_sale).toLocaleString('es-CO')}</span></td>
+            <td><span class="badge ${badgeClass} border px-3 py-2 rounded-pill">${v.payment_method_sale}</span></td>
+            <td><div class="d-flex flex-column text-muted"><span class="text-dark fw-medium">${fecha}</span><span style="font-size: 0.85rem;">${hora}</span></div></td>
             <td class="py-3 text-end pe-3">
-                <button class="btn btn-icon btn-sm btn-outline-primary border-0 rounded-circle shadow-sm" 
-                        onclick="verRecibo(${v.id_sale})" 
-                        title="Ver Detalle"
-                        style="width: 32px; height: 32px;">
-                    <i class="ti ti-eye fs-7"></i>
-                </button>
-
-                <button class="btn btn-icon btn-sm btn-outline-danger border-0 rounded-circle shadow-sm ms-1"
-                        onclick="anularVenta(${v.id_sale})"
-                        title="Anular venta"
-                        style="width: 32px; height: 32px;">
-                    <i class="ti ti-trash fs-7"></i>
-                </button>
+                <button class="btn btn-icon btn-sm btn-outline-primary border-0 rounded-circle shadow-sm" onclick="verRecibo(${v.id_sale})" title="Ver Detalle" style="width: 32px; height: 32px;"><i class="ti ti-eye fs-7"></i></button>
+                <button class="btn btn-icon btn-sm btn-outline-danger border-0 rounded-circle shadow-sm ms-1" onclick="anularVenta(${v.id_sale})" title="Anular venta" style="width: 32px; height: 32px;"><i class="ti ti-trash fs-7"></i></button>
             </td>
         </tr>`;
     }).join('');
 }
 
-// Recibo
+function actualizarPaginacion(totalItems) {
+    const totalPaginas = Math.ceil(totalItems / registrosPorPagina);
+    const contenedor = document.getElementById('contenedorPaginacion');
+    const info = document.getElementById('infoPaginacion');
+
+    if (info) {
+        const desde = totalItems === 0 ? 0 : (paginaActual - 1) * registrosPorPagina + 1;
+        const hasta = Math.min(paginaActual * registrosPorPagina, totalItems);
+        info.innerText = `Mostrando ${desde} a ${hasta} de ${totalItems.toLocaleString()} registros`;
+    }
+
+    if (!contenedor) return;
+
+    let html = '';
+    html += `<li class="page-item ${paginaActual === 1 ? 'disabled' : ''}"><a class="page-link" href="javascript:void(0)" onclick="cambiarPagina(${paginaActual - 1})">Anterior</a></li>`;
+
+    let inicio = Math.max(1, paginaActual - 2);
+    let fin = Math.min(totalPaginas, inicio + 4);
+    if (fin - inicio < 4) inicio = Math.max(1, fin - 4);
+
+    for (let i = inicio; i <= fin; i++) {
+        if (i <= 0) continue;
+        html += `<li class="page-item ${i === paginaActual ? 'active' : ''}"><a class="page-link" href="javascript:void(0)" onclick="cambiarPagina(${i})">${i}</a></li>`;
+    }
+
+    html += `<li class="page-item ${paginaActual >= totalPaginas || totalPaginas === 0 ? 'disabled' : ''}"><a class="page-link" href="javascript:void(0)" onclick="cambiarPagina(${paginaActual + 1})">Siguiente</a></li>`;
+    contenedor.innerHTML = html;
+}
+
+function cambiarPagina(p) {
+    paginaActual = p;
+    cargarVentas();
+    window.scrollTo(0, 0);
+}
+
+// --- AUXILIARES ---
+
+async function cargarRifasSelect() {
+    const fd = new FormData(); fd.append('action', 'obtener_rifas');
+    const res = await fetch('ajax/ventas.ajax.php', { method: 'POST', body: fd });
+    const data = await res.json();
+    if (data.success) {
+        const sel = document.getElementById('filterRifa');
+        if (sel) sel.innerHTML = '<option value="">Todas las rifas</option>' + data.data.map(r => `<option value="${r.id_raffle}">${r.title_raffle}</option>`).join('');
+    }
+}
+
+async function cargarAdminsSelect() {
+    const fd = new FormData(); fd.append('action', 'obtener_admins');
+    const res = await fetch('ajax/ventas.ajax.php', { method: 'POST', body: fd });
+    const data = await res.json();
+    if (data.success) {
+        const sel = document.getElementById('filterAdmin');
+        if (sel) sel.innerHTML = '<option value="">Todos los admins</option>' + data.data.map(a => `<option value="${a.id_admin}">${a.email_admin}</option>`).join('');
+    }
+}
+
+async function cargarOrigenesSelect() {
+    const fd = new FormData(); fd.append('action', 'obtener_origenes');
+    const res = await fetch('ajax/ventas.ajax.php', { method: 'POST', body: fd });
+    const data = await res.json();
+    if (data.success && data.data) {
+        const sel = document.getElementById('filterOrigen');
+        if (sel) sel.innerHTML = '<option value="">Todos los orígenes</option>' + data.data.map(o => `<option value="${o}">${o}</option>`).join('');
+    }
+}
+
+function debounce(f, w) {
+    let t;
+    return (...a) => { clearTimeout(t); t = setTimeout(() => f(...a), w); };
+}
+
 function verRecibo(id) {
     const fd = new FormData();
     fd.append('action', 'detalle_venta');
     fd.append('id_sale', id);
-
     fetch('ajax/ventas.ajax.php', { method: 'POST', body: fd })
         .then(r => r.json())
         .then(res => {
@@ -321,38 +223,44 @@ function verRecibo(id) {
         });
 }
 
-// Anular
 function anularVenta(id) {
-
     Swal.fire({
         title: '¿Anular venta?',
+        text: 'Esta acción no se puede revertir',
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonText: 'Sí, anular'
-    }).then(result => {
+        confirmButtonText: 'Sí, anular',
+        cancelButtonText: 'Cancelar',
+        showLoaderOnConfirm: true,
+        allowOutsideClick: () => !Swal.isLoading(),
 
-        if (!result.isConfirmed) return;
+        preConfirm: async () => {
+            try {
+                const fd = new FormData();
+                fd.append('action', 'anular');
+                fd.append('id_sale', id);
 
-        const fd = new FormData();
-        fd.append('action', 'anular');
-        fd.append('id_sale', id);
+                const res = await fetch('ajax/ventas.ajax.php', {
+                    method: 'POST',
+                    body: fd
+                });
 
-        fetch('ajax/ventas.ajax.php', { method: 'POST', body: fd })
-            .then(r => r.json())
-            .then(res => {
-                if (res.success) {
-                    Swal.fire('OK', 'Venta anulada', 'success');
-                    cargarVentas();
+                const data = await res.json();
+
+                if (!data.success) {
+                    throw new Error(data.message || 'Error al anular');
                 }
-            });
-    });
-}
 
-// Util
-function debounce(f, w) {
-    let t;
-    return (...a) => {
-        clearTimeout(t);
-        t = setTimeout(() => f(...a), w);
-    };
+                return data;
+
+            } catch (error) {
+                Swal.showValidationMessage(error.message);
+            }
+        }
+    }).then(result => {
+        if (result.isConfirmed) {
+            Swal.fire('OK', 'Venta anulada correctamente', 'success');
+            cargarVentas();
+        }
+    });
 }
