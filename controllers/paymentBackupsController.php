@@ -264,7 +264,8 @@ class PaymentBackupsController
         'quantity_sale' => $cantidad,
         'total_sale' => $backup['amount_payment_backup'],
         'code_sale' => $backup['code_payment_backup'],
-        'payment_method_sale' => 'Página Web'
+        'payment_method_sale' => 'Página Web',
+        'source_sale' => $backup['source_payment_backup'] ?? null
     ]);
 
     /* =====================================================
